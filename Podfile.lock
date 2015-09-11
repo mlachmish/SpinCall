@@ -2,13 +2,6 @@ PODS:
   - AFNetworkActivityLogger (2.0.4):
     - AFNetworking/NSURLConnection (~> 2.0)
     - AFNetworking/NSURLSession (~> 2.0)
-  - AFNetworking (2.6.0):
-    - AFNetworking/NSURLConnection (= 2.6.0)
-    - AFNetworking/NSURLSession (= 2.6.0)
-    - AFNetworking/Reachability (= 2.6.0)
-    - AFNetworking/Security (= 2.6.0)
-    - AFNetworking/Serialization (= 2.6.0)
-    - AFNetworking/UIKit (= 2.6.0)
   - AFNetworking/NSURLConnection (2.6.0):
     - AFNetworking/Reachability
     - AFNetworking/Security
@@ -20,9 +13,6 @@ PODS:
   - AFNetworking/Reachability (2.6.0)
   - AFNetworking/Security (2.6.0)
   - AFNetworking/Serialization (2.6.0)
-  - AFNetworking/UIKit (2.6.0):
-    - AFNetworking/NSURLConnection
-    - AFNetworking/NSURLSession
   - CocoaLumberjack (2.0.1):
     - CocoaLumberjack/Default (= 2.0.1)
     - CocoaLumberjack/Extensions (= 2.0.1)
@@ -70,7 +60,6 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworkActivityLogger
-  - AFNetworking (~> 2.5)
   - CocoaLumberjack (~> 2.0.1)
   - libextobjc (~> 0.3)
   - Reveal-iOS-SDK
