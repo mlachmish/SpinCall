@@ -10,6 +10,7 @@
 #import "DDTTYLogger.h"
 #import "DDASLLogger.h"
 #import "CocoaLumberjack.h"
+#import "SPCSpinnerViewController.h"
 
 //TODO: refactor logging
 static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
@@ -25,6 +26,11 @@ static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
     [DDLog addLogger:[DDASLLogger sharedInstance]];
     [DDLog addLogger:[DDTTYLogger sharedInstance]];
     DDLogVerbose(@"App launched!");
+
+    UIViewController *spinnerViewController = [[SPCSpinnerViewController alloc] init];
+    self.window.rootViewController = spinnerViewController;
+    [self.window makeKeyAndVisible];
+
     return YES;
 }
 

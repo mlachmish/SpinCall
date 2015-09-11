@@ -7,13 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		62DD940DFFD64BC9DEDC7CD0 /* SPCAddressBookFacadeContact.m in Sources */ = {isa = PBXBuildFile; fileRef = 62DD91D670280EC93E3892DA /* SPCAddressBookFacadeContact.m */; };
 		62DD96661DB44707A2F4355B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 62DD97C5866CFB6B162D77DF /* Images.xcassets */; };
+		62DD99CEDBCE558E03D569E6 /* SPCAddressBookFacade.m in Sources */ = {isa = PBXBuildFile; fileRef = 62DD9427BF09126E5C8AF007 /* SPCAddressBookFacade.m */; };
 		734CD838061D912682822C3D /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BF7697983E04C6119A6BC6C7 /* libPods.a */; };
 		90FC839E1BA387040036B15D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 90FC839D1BA387040036B15D /* main.m */; };
 		90FC83A11BA387040036B15D /* SPCAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 90FC83A01BA387040036B15D /* SPCAppDelegate.m */; };
-		90FC83A41BA387040036B15D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 90FC83A31BA387040036B15D /* ViewController.m */; };
-		90FC83A71BA387040036B15D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 90FC83A51BA387040036B15D /* Main.storyboard */; };
-		90FC83AC1BA387040036B15D /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 90FC83AA1BA387040036B15D /* LaunchScreen.xib */; };
+		90FC83A41BA387040036B15D /* SPCSpinnerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 90FC83A31BA387040036B15D /* SPCSpinnerViewController.m */; };
 		90FC83B81BA387040036B15D /* SpinCallTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 90FC83B71BA387040036B15D /* SpinCallTests.m */; };
 /* End PBXBuildFile section */
 
@@ -29,16 +29,18 @@
 
 /* Begin PBXFileReference section */
 		34B9D4C6F0553B4B2BC7321D /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		62DD91D670280EC93E3892DA /* SPCAddressBookFacadeContact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPCAddressBookFacadeContact.m; sourceTree = "<group>"; };
+		62DD9427BF09126E5C8AF007 /* SPCAddressBookFacade.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPCAddressBookFacade.m; sourceTree = "<group>"; };
+		62DD94333B0DFFE67754CC8E /* SPCAddressBookFacadeContact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPCAddressBookFacadeContact.h; sourceTree = "<group>"; };
 		62DD97C5866CFB6B162D77DF /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		62DD992B0A35142ECBC2F1B1 /* SPCAddressBookFacade.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPCAddressBookFacade.h; sourceTree = "<group>"; };
 		90FC83981BA387040036B15D /* SpinCall.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpinCall.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		90FC839C1BA387040036B15D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		90FC839D1BA387040036B15D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		90FC839F1BA387040036B15D /* SPCAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SPCAppDelegate.h; sourceTree = "<group>"; };
 		90FC83A01BA387040036B15D /* SPCAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SPCAppDelegate.m; sourceTree = "<group>"; };
-		90FC83A21BA387040036B15D /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		90FC83A31BA387040036B15D /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		90FC83A61BA387040036B15D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		90FC83AB1BA387040036B15D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		90FC83A21BA387040036B15D /* SPCSpinnerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SPCSpinnerViewController.h; sourceTree = "<group>"; };
+		90FC83A31BA387040036B15D /* SPCSpinnerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SPCSpinnerViewController.m; sourceTree = "<group>"; };
 		90FC83B11BA387040036B15D /* SpinCallTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpinCallTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		90FC83B61BA387040036B15D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		90FC83B71BA387040036B15D /* SpinCallTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SpinCallTests.m; sourceTree = "<group>"; };
@@ -74,6 +76,17 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		62DD952F2815B7BCFF043F4B /* AddressBook */ = {
+			isa = PBXGroup;
+			children = (
+				62DD992B0A35142ECBC2F1B1 /* SPCAddressBookFacade.h */,
+				62DD9427BF09126E5C8AF007 /* SPCAddressBookFacade.m */,
+				62DD94333B0DFFE67754CC8E /* SPCAddressBookFacadeContact.h */,
+				62DD91D670280EC93E3892DA /* SPCAddressBookFacadeContact.m */,
+			);
+			path = AddressBook;
+			sourceTree = "<group>";
+		};
 		90FC838F1BA387040036B15D = {
 			isa = PBXGroup;
 			children = (
@@ -99,11 +112,10 @@
 			children = (
 				90FC839F1BA387040036B15D /* SPCAppDelegate.h */,
 				90FC83A01BA387040036B15D /* SPCAppDelegate.m */,
-				90FC83A21BA387040036B15D /* ViewController.h */,
-				90FC83A31BA387040036B15D /* ViewController.m */,
-				90FC83A51BA387040036B15D /* Main.storyboard */,
-				90FC83AA1BA387040036B15D /* LaunchScreen.xib */,
+				90FC83A21BA387040036B15D /* SPCSpinnerViewController.h */,
+				90FC83A31BA387040036B15D /* SPCSpinnerViewController.m */,
 				90FC839B1BA387040036B15D /* Supporting Files */,
+				62DD952F2815B7BCFF043F4B /* AddressBook */,
 			);
 			path = SpinCall;
 			sourceTree = "<group>";
@@ -225,8 +237,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				90FC83A71BA387040036B15D /* Main.storyboard in Resources */,
-				90FC83AC1BA387040036B15D /* LaunchScreen.xib in Resources */,
 				62DD96661DB44707A2F4355B /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -278,9 +288,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				90FC83A41BA387040036B15D /* ViewController.m in Sources */,
+				90FC83A41BA387040036B15D /* SPCSpinnerViewController.m in Sources */,
 				90FC83A11BA387040036B15D /* SPCAppDelegate.m in Sources */,
 				90FC839E1BA387040036B15D /* main.m in Sources */,
+				62DD99CEDBCE558E03D569E6 /* SPCAddressBookFacade.m in Sources */,
+				62DD940DFFD64BC9DEDC7CD0 /* SPCAddressBookFacadeContact.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -301,25 +313,6 @@
 			targetProxy = 90FC83B21BA387040036B15D /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		90FC83A51BA387040036B15D /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				90FC83A61BA387040036B15D /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		90FC83AA1BA387040036B15D /* LaunchScreen.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				90FC83AB1BA387040036B15D /* Base */,
-			);
-			name = LaunchScreen.xib;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		90FC83B91BA387040036B15D /* Debug */ = {
