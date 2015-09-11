@@ -7,11 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		62DD96661DB44707A2F4355B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 62DD97C5866CFB6B162D77DF /* Images.xcassets */; };
+		734CD838061D912682822C3D /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BF7697983E04C6119A6BC6C7 /* libPods.a */; };
 		90FC839E1BA387040036B15D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 90FC839D1BA387040036B15D /* main.m */; };
-		90FC83A11BA387040036B15D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 90FC83A01BA387040036B15D /* AppDelegate.m */; };
+		90FC83A11BA387040036B15D /* SPCAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 90FC83A01BA387040036B15D /* SPCAppDelegate.m */; };
 		90FC83A41BA387040036B15D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 90FC83A31BA387040036B15D /* ViewController.m */; };
 		90FC83A71BA387040036B15D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 90FC83A51BA387040036B15D /* Main.storyboard */; };
-		90FC83A91BA387040036B15D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 90FC83A81BA387040036B15D /* Images.xcassets */; };
 		90FC83AC1BA387040036B15D /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 90FC83AA1BA387040036B15D /* LaunchScreen.xib */; };
 		90FC83B81BA387040036B15D /* SpinCallTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 90FC83B71BA387040036B15D /* SpinCallTests.m */; };
 /* End PBXBuildFile section */
@@ -27,19 +28,22 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		34B9D4C6F0553B4B2BC7321D /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		62DD97C5866CFB6B162D77DF /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		90FC83981BA387040036B15D /* SpinCall.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpinCall.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		90FC839C1BA387040036B15D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		90FC839D1BA387040036B15D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		90FC839F1BA387040036B15D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		90FC83A01BA387040036B15D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		90FC839F1BA387040036B15D /* SPCAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SPCAppDelegate.h; sourceTree = "<group>"; };
+		90FC83A01BA387040036B15D /* SPCAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SPCAppDelegate.m; sourceTree = "<group>"; };
 		90FC83A21BA387040036B15D /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		90FC83A31BA387040036B15D /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		90FC83A61BA387040036B15D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		90FC83A81BA387040036B15D /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		90FC83AB1BA387040036B15D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		90FC83B11BA387040036B15D /* SpinCallTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpinCallTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		90FC83B61BA387040036B15D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		90FC83B71BA387040036B15D /* SpinCallTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SpinCallTests.m; sourceTree = "<group>"; };
+		BF7697983E04C6119A6BC6C7 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		CD228B3E1B4683A5277A75F1 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +51,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				734CD838061D912682822C3D /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -60,12 +65,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0141D7B5B07461B7D3D36D20 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				34B9D4C6F0553B4B2BC7321D /* Pods.debug.xcconfig */,
+				CD228B3E1B4683A5277A75F1 /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		90FC838F1BA387040036B15D = {
 			isa = PBXGroup;
 			children = (
 				90FC839A1BA387040036B15D /* SpinCall */,
 				90FC83B41BA387040036B15D /* SpinCallTests */,
 				90FC83991BA387040036B15D /* Products */,
+				0141D7B5B07461B7D3D36D20 /* Pods */,
+				FCC7F98ED1298F4BFD6A0286 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -81,12 +97,11 @@
 		90FC839A1BA387040036B15D /* SpinCall */ = {
 			isa = PBXGroup;
 			children = (
-				90FC839F1BA387040036B15D /* AppDelegate.h */,
-				90FC83A01BA387040036B15D /* AppDelegate.m */,
+				90FC839F1BA387040036B15D /* SPCAppDelegate.h */,
+				90FC83A01BA387040036B15D /* SPCAppDelegate.m */,
 				90FC83A21BA387040036B15D /* ViewController.h */,
 				90FC83A31BA387040036B15D /* ViewController.m */,
 				90FC83A51BA387040036B15D /* Main.storyboard */,
-				90FC83A81BA387040036B15D /* Images.xcassets */,
 				90FC83AA1BA387040036B15D /* LaunchScreen.xib */,
 				90FC839B1BA387040036B15D /* Supporting Files */,
 			);
@@ -98,6 +113,7 @@
 			children = (
 				90FC839C1BA387040036B15D /* Info.plist */,
 				90FC839D1BA387040036B15D /* main.m */,
+				62DD97C5866CFB6B162D77DF /* Images.xcassets */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -119,6 +135,14 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		FCC7F98ED1298F4BFD6A0286 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BF7697983E04C6119A6BC6C7 /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -126,9 +150,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 90FC83BB1BA387040036B15D /* Build configuration list for PBXNativeTarget "SpinCall" */;
 			buildPhases = (
+				C3A49AC9EAE970C25622EA6A /* Check Pods Manifest.lock */,
 				90FC83941BA387040036B15D /* Sources */,
 				90FC83951BA387040036B15D /* Frameworks */,
 				90FC83961BA387040036B15D /* Resources */,
+				6D2ED9B47177F74D84A9B942 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -201,7 +227,7 @@
 			files = (
 				90FC83A71BA387040036B15D /* Main.storyboard in Resources */,
 				90FC83AC1BA387040036B15D /* LaunchScreen.xib in Resources */,
-				90FC83A91BA387040036B15D /* Images.xcassets in Resources */,
+				62DD96661DB44707A2F4355B /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -214,13 +240,46 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		6D2ED9B47177F74D84A9B942 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C3A49AC9EAE970C25622EA6A /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		90FC83941BA387040036B15D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				90FC83A41BA387040036B15D /* ViewController.m in Sources */,
-				90FC83A11BA387040036B15D /* AppDelegate.m in Sources */,
+				90FC83A11BA387040036B15D /* SPCAppDelegate.m in Sources */,
 				90FC839E1BA387040036B15D /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -345,6 +404,7 @@
 		};
 		90FC83BC1BA387040036B15D /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 34B9D4C6F0553B4B2BC7321D /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = SpinCall/Info.plist;
@@ -355,6 +415,7 @@
 		};
 		90FC83BD1BA387040036B15D /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CD228B3E1B4683A5277A75F1 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = SpinCall/Info.plist;
@@ -416,6 +477,7 @@
 				90FC83BD1BA387040036B15D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		90FC83BE1BA387040036B15D /* Build configuration list for PBXNativeTarget "SpinCallTests" */ = {
 			isa = XCConfigurationList;
@@ -424,6 +486,7 @@
 				90FC83C01BA387040036B15D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

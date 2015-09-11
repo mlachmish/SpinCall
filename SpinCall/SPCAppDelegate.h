@@ -1,5 +1,5 @@
 //
-//  AppDelegate.h
+//  SPCAppDelegate.h
 //  SpinCall
 //
 //  Created by Matan Lachmish on 9/12/15.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
+@interface SPCAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 

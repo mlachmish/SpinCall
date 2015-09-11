@@ -1,22 +1,30 @@
 //
-//  AppDelegate.m
+//  SPCAppDelegate.m
 //  SpinCall
 //
 //  Created by Matan Lachmish on 9/12/15.
 //  Copyright (c) 2015 Matan Lachmish. All rights reserved.
 //
 
-#import "AppDelegate.h"
+#import "SPCAppDelegate.h"
+#import "DDTTYLogger.h"
+#import "DDASLLogger.h"
+#import "CocoaLumberjack.h"
 
-@interface AppDelegate ()
+//TODO: refactor logging
+static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
+
+@interface SPCAppDelegate ()
 
 @end
 
-@implementation AppDelegate
+@implementation SPCAppDelegate
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    [DDLog addLogger:[DDASLLogger sharedInstance]];
+    [DDLog addLogger:[DDTTYLogger sharedInstance]];
+    DDLogVerbose(@"App launched!");
     return YES;
 }
 
