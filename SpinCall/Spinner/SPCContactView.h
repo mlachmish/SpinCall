@@ -18,8 +18,10 @@
 
 @property (strong, nonatomic) UIImage *avatar;
 @property (strong, nonatomic) NSString *name;
-@property (strong, nonatomic) NSString *phoneLabel;
-@property (strong, nonatomic) NSString *phoneNumber;
+@property (strong, nonatomic) NSString *primaryPhoneLabel;
+@property (strong, nonatomic) NSString *primaryPhoneNumber;
+@property (strong, nonatomic) NSString *secondaryPhoneLabel;
+@property (strong, nonatomic) NSString *secondaryPhoneNumber;
 
 @property (weak, nonatomic) id<SPCContactViewDelegate> delegate;
 

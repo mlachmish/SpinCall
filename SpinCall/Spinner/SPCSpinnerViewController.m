@@ -68,13 +68,19 @@ static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
     SPCAddressBookFacadeContact *randomContact = [self getRandomContact];
     _contactView.name = randomContact.displayName;
     _contactView.avatar = randomContact.avatar;
-    _contactView.phoneLabel = randomContact.phoneNumbers.firstObject[SPCAddressBookFacadePhoneNumbersListDictionaryKeys.phoneLabel];
-    _contactView.phoneNumber = randomContact.phoneNumbers.firstObject[SPCAddressBookFacadePhoneNumbersListDictionaryKeys.phoneNumber];
+    _contactView.primaryPhoneLabel = randomContact.phoneNumbers.firstObject[SPCAddressBookFacadePhoneNumbersListDictionaryKeys.phoneLabel];
+    _contactView.primaryPhoneNumber = randomContact.phoneNumbers.firstObject[SPCAddressBookFacadePhoneNumbersListDictionaryKeys.phoneNumber];
+
+    if (randomContact.phoneNumbers.count > 1) {
+        _contactView.secondaryPhoneLabel = randomContact.phoneNumbers.lastObject[SPCAddressBookFacadePhoneNumbersListDictionaryKeys.phoneLabel];
+        _contactView.secondaryPhoneNumber = randomContact.phoneNumbers.lastObject[SPCAddressBookFacadePhoneNumbersListDictionaryKeys.phoneNumber];
+    }
 }
 
 #pragma mark - SPCContactViewDelegate
 
 - (void)phoneNumberLabelTapped:(NSString *)phoneNumber {
+    DDLogDebug(@"Calling %@", phoneNumber);
     NSString *urlString = [@"tel:" stringByAppendingString:phoneNumber];
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]];
 }

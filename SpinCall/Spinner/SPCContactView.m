@@ -11,18 +11,24 @@ static CGFloat const kAvatarGutter = 70.0;
 static CGFloat const kAvatarDiameter = 230.0;
 static CGFloat const kMargin = 15.0;
 
+typedef NS_ENUM (NSInteger, SPCContactViewPhoneLabelTags) {
+    SPCContactViewPhoneLabelTagPrimary,
+    SPCContactViewPhoneLabelTagSecondary,
+    SPCContactViewPhoneLabelTagsCount
+};
+
 @interface SPCContactView ()
 
 @property (strong, nonatomic) UILabel *nameLabel;
-@property (strong, nonatomic) UILabel *phoneLabelLabel;
-@property (strong, nonatomic) UILabel *phoneNumberLabel;
+@property (strong, nonatomic) UILabel *primaryPhoneLabelLabel;
+@property (strong, nonatomic) UILabel *primaryPhoneNumberLabel;
+@property (strong, nonatomic) UILabel *secondaryPhoneLabelLabel;
+@property (strong, nonatomic) UILabel *secondaryPhoneNumberLabel;
 @property (strong, nonatomic) SPCAvatarImageView *avatarView;
 
 @end
 
-@implementation SPCContactView {
-
-}
+@implementation SPCContactView
 
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
@@ -33,14 +39,25 @@ static CGFloat const kMargin = 15.0;
         _nameLabel = [[UILabel alloc] init];
         [self addSubview:_nameLabel];
 
-        _phoneLabelLabel = [[UILabel alloc] init];
-        [self addSubview:_phoneLabelLabel];
+        _primaryPhoneLabelLabel = [[UILabel alloc] init];
+        [self addSubview:_primaryPhoneLabelLabel];
 
-        _phoneNumberLabel = [[UILabel alloc] init];
-        UITapGestureRecognizer *phoneNumberTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(phoneNumberLabelTapped:)];
-        [_phoneNumberLabel addGestureRecognizer:phoneNumberTapGesture];
-        _phoneNumberLabel.userInteractionEnabled = YES;
-        [self addSubview:_phoneNumberLabel];
+        _primaryPhoneNumberLabel = [[UILabel alloc] init];
+        _primaryPhoneNumberLabel.tag = SPCContactViewPhoneLabelTagPrimary;
+        UITapGestureRecognizer *primaryPhoneNumberTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(phoneNumberLabelTapped:)];
+        [_primaryPhoneNumberLabel addGestureRecognizer:primaryPhoneNumberTapGesture];
+        _primaryPhoneNumberLabel.userInteractionEnabled = YES;
+        [self addSubview:_primaryPhoneNumberLabel];
+
+        _secondaryPhoneLabelLabel = [[UILabel alloc] init];
+        [self addSubview:_secondaryPhoneLabelLabel];
+
+        _secondaryPhoneNumberLabel = [[UILabel alloc] init];
+        _secondaryPhoneNumberLabel.tag = SPCContactViewPhoneLabelTagSecondary;
+        UITapGestureRecognizer *secondaryPhoneNumberTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(phoneNumberLabelTapped:)];
+        [_secondaryPhoneNumberLabel addGestureRecognizer:secondaryPhoneNumberTapGesture];
+        _secondaryPhoneNumberLabel.userInteractionEnabled = YES;
+        [self addSubview:_secondaryPhoneNumberLabel];
 
         UITapGestureRecognizer *tappedOutSideGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSingleTap:)];
         [self addGestureRecognizer:tappedOutSideGesture];
@@ -54,11 +71,17 @@ static CGFloat const kMargin = 15.0;
     self.nameLabel.frame = CGRectMake(self.center.x - self.nameLabel.width/2, self.avatarView.bottom + 2*kMargin, 0, 0);
     [self.nameLabel sizeToFit];
 
-    self.phoneLabelLabel.frame = CGRectMake(self.center.x - (self.phoneLabelLabel.width+self.phoneNumberLabel.width + kMargin)/2, self.nameLabel.bottom + kMargin, 0, 0);
-    [self.phoneLabelLabel sizeToFit];
+    self.primaryPhoneLabelLabel.frame = CGRectMake(self.center.x - (self.primaryPhoneLabelLabel.width+self.primaryPhoneNumberLabel.width + kMargin)/2, self.nameLabel.bottom + kMargin, 0, 0);
+    [self.primaryPhoneLabelLabel sizeToFit];
 
-    self.phoneNumberLabel.frame = CGRectMake(self.phoneLabelLabel.right + kMargin, self.phoneLabelLabel.top, 0, 0);
-    [self.phoneNumberLabel sizeToFit];
+    self.primaryPhoneNumberLabel.frame = CGRectMake(self.primaryPhoneLabelLabel.right + kMargin, self.primaryPhoneLabelLabel.top, 0, 0);
+    [self.primaryPhoneNumberLabel sizeToFit];
+
+    self.secondaryPhoneLabelLabel.frame = CGRectMake(self.center.x - (self.secondaryPhoneLabelLabel.width+self.secondaryPhoneNumberLabel.width + kMargin)/2, self.primaryPhoneLabelLabel.bottom + kMargin, 0, 0);
+    [self.secondaryPhoneLabelLabel sizeToFit];
+
+    self.secondaryPhoneNumberLabel.frame = CGRectMake(self.secondaryPhoneLabelLabel.right + kMargin, self.secondaryPhoneLabelLabel.top, 0, 0);
+    [self.secondaryPhoneNumberLabel sizeToFit];
 }
 
 #pragma mark - Custom Setters
@@ -74,15 +97,27 @@ static CGFloat const kMargin = 15.0;
     [self layoutSubviews];
 }
 
-- (void)setPhoneLabel:(NSString *)phoneLabel {
-    _phoneLabel = phoneLabel;
-    self.phoneLabelLabel.text = phoneLabel;
+- (void)setPrimaryPhoneLabel:(NSString *)primaryPhoneLabel {
+    _primaryPhoneLabel = primaryPhoneLabel;
+    self.primaryPhoneLabelLabel.text = primaryPhoneLabel;
     [self layoutSubviews];
 }
 
-- (void)setPhoneNumber:(NSString *)phoneNumber {
-    _phoneNumber = phoneNumber;
-    self.phoneNumberLabel.text = phoneNumber;
+- (void)setPrimaryPhoneNumber:(NSString *)primaryPhoneNumber {
+    _primaryPhoneNumber = primaryPhoneNumber;
+    self.primaryPhoneNumberLabel.text = primaryPhoneNumber;
+    [self layoutSubviews];
+}
+
+- (void)setSecondaryPhoneLabel:(NSString *)secondaryPhoneLabel {
+    _secondaryPhoneLabel = secondaryPhoneLabel;
+    self.secondaryPhoneLabelLabel.text = secondaryPhoneLabel;
+    [self layoutSubviews];
+}
+
+- (void)setSecondaryPhoneNumber:(NSString *)secondaryPhoneNumber {
+    _secondaryPhoneNumber = secondaryPhoneNumber;
+    self.secondaryPhoneNumberLabel.text = secondaryPhoneNumber;
     [self layoutSubviews];
 }
 
@@ -105,7 +140,11 @@ static CGFloat const kMargin = 15.0;
 }
 
 - (void)phoneNumberLabelTapped:(UITapGestureRecognizer *)recognizer {
-    [self.delegate phoneNumberLabelTapped:self.phoneNumberLabel.text];
+    if (recognizer.view.tag == SPCContactViewPhoneLabelTagPrimary) {
+        [self.delegate phoneNumberLabelTapped:self.primaryPhoneNumberLabel.text];
+    } else if (recognizer.view.tag == SPCContactViewPhoneLabelTagSecondary) {
+        [self.delegate phoneNumberLabelTapped:self.secondaryPhoneNumberLabel.text];
+    }
 }
 
 @end
