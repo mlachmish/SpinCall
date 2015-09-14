@@ -97,6 +97,9 @@ static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
     if (randomContact.phoneNumbers.count > 1) {
         self.contactView.secondaryPhoneLabel = randomContact.phoneNumbers.lastObject[SPCAddressBookFacadePhoneNumbersListDictionaryKeys.phoneLabel];
         self.contactView.secondaryPhoneNumber = randomContact.phoneNumbers.lastObject[SPCAddressBookFacadePhoneNumbersListDictionaryKeys.phoneNumber];
+    } else {
+        self.contactView.secondaryPhoneLabel = nil;
+        self.contactView.secondaryPhoneNumber = nil;
     }
 }
 
