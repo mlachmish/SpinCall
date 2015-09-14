@@ -5,11 +5,22 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol SPCContactViewDelegate
+
+@optional
+
+- (void)tappedOutSide;
+- (void)phoneNumberLabelTapped:(NSString *)phoneNumber;
+
+@end
+
 @interface SPCContactView : UIView
 
 @property (strong, nonatomic) UIImage *avatar;
 @property (strong, nonatomic) NSString *name;
 @property (strong, nonatomic) NSString *phoneLabel;
 @property (strong, nonatomic) NSString *phoneNumber;
+
+@property (weak, nonatomic) id<SPCContactViewDelegate> delegate;
 
 @end

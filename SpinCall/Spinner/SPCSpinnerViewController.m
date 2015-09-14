@@ -15,7 +15,7 @@
 //TODO: refactor logging
 static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
 
-@interface SPCSpinnerViewController ()
+@interface SPCSpinnerViewController () <SPCContactViewDelegate>
 
 @property (strong, nonatomic) NSArray *contacts;
 @property (strong, nonatomic) SPCContactView *contactView;
@@ -29,15 +29,12 @@ static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
 
     self.view.backgroundColor = [UIColor whiteColor];
     _contactView = [[SPCContactView alloc] initWithFrame:self.view.frame];
+    _contactView.delegate = self;
     [self.view addSubview:_contactView];
 
     [self requestAddressBookPermissionIfNeeded];
 
     [self loadRandomContact];
-
-    UITapGestureRecognizer *singleFingerTap = [[UITapGestureRecognizer alloc] initWithTarget:self
-                                                                                      action:@selector(handleSingleTap:)];
-    [self.view addGestureRecognizer:singleFingerTap];
 }
 
 #pragma mark - Custom Accessors
@@ -75,7 +72,15 @@ static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
     _contactView.phoneNumber = randomContact.phoneNumbers.firstObject[SPCAddressBookFacadePhoneNumbersListDictionaryKeys.phoneNumber];
 }
 
-- (void)handleSingleTap:(UITapGestureRecognizer *)recognizer {
+#pragma mark - SPCContactViewDelegate
+
+- (void)phoneNumberLabelTapped:(NSString *)phoneNumber {
+    NSString *urlString = [@"tel:" stringByAppendingString:phoneNumber];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]];
+}
+
+- (void)tappedOutSide {
     [self loadRandomContact];
 }
+
 @end

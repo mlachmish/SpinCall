@@ -37,7 +37,13 @@ static CGFloat const kMargin = 15.0;
         [self addSubview:_phoneLabelLabel];
 
         _phoneNumberLabel = [[UILabel alloc] init];
+        UITapGestureRecognizer *phoneNumberTapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(phoneNumberLabelTapped:)];
+        [_phoneNumberLabel addGestureRecognizer:phoneNumberTapGesture];
+        _phoneNumberLabel.userInteractionEnabled = YES;
         [self addSubview:_phoneNumberLabel];
+
+        UITapGestureRecognizer *tappedOutSideGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSingleTap:)];
+        [self addGestureRecognizer:tappedOutSideGesture];
     }
     return self;
 }
@@ -45,7 +51,7 @@ static CGFloat const kMargin = 15.0;
 - (void)layoutSubviews {
     self.avatarView.frame = CGRectMake(self.center.x - self.avatarView.width/2, kAvatarGutter, kAvatarDiameter, kAvatarDiameter);
 
-    self.nameLabel.frame = CGRectMake(self.center.x - self.nameLabel.width/2, self.avatarView.bottom + kMargin, 0, 0);
+    self.nameLabel.frame = CGRectMake(self.center.x - self.nameLabel.width/2, self.avatarView.bottom + 2*kMargin, 0, 0);
     [self.nameLabel sizeToFit];
 
     self.phoneLabelLabel.frame = CGRectMake(self.center.x - (self.phoneLabelLabel.width+self.phoneNumberLabel.width + kMargin)/2, self.nameLabel.bottom + kMargin, 0, 0);
@@ -90,6 +96,16 @@ static CGFloat const kMargin = 15.0;
     }
 
     [self layoutSubviews];
+}
+
+#pragma mark - Private
+
+- (void)handleSingleTap:(UITapGestureRecognizer *)recognizer {
+    [self.delegate tappedOutSide];
+}
+
+- (void)phoneNumberLabelTapped:(UITapGestureRecognizer *)recognizer {
+    [self.delegate phoneNumberLabelTapped:self.phoneNumberLabel.text];
 }
 
 @end
