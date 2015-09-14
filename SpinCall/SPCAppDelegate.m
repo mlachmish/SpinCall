@@ -27,6 +27,8 @@ static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
     [DDLog addLogger:[DDTTYLogger sharedInstance]];
     DDLogVerbose(@"App launched!");
 
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    self.window.backgroundColor = [UIColor whiteColor];
     UIViewController *spinnerViewController = [[SPCSpinnerViewController alloc] init];
     self.window.rootViewController = spinnerViewController;
     [self.window makeKeyAndVisible];
