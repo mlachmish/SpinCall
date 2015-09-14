@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 /**
  * This is part of the address book facade API.
@@ -15,7 +16,9 @@
 @interface SPCAddressBookFacadeContact : NSObject
 
 @property (nonatomic, strong) NSString *displayName;
+@property (nonatomic, strong) UIImage *avatar;
+@property (nonatomic, strong) NSArray *phoneNumbers;
 @property (nonatomic, strong) NSArray *emailAddresses;
 
-- (instancetype)initWithDisplayName:(NSString *)displayName emailAddresses:(NSArray *)emailAddresses;
+- (instancetype)initWithDisplayName:(NSString *)displayName avatar:(UIImage *)avatar phoneNumber:(NSArray *)phoneNumbers emailAddresses:(NSArray *)emailAddresses;
 @end

@@ -11,6 +11,11 @@
 
 #import <AddressBook/AddressBook.h>
 
+const struct SPCAddressBookFacadePhoneNumbersListDictionaryKeys SPCAddressBookFacadePhoneNumbersListDictionaryKeys = {
+        .phoneLabel = @"phoneLabel",
+        .phoneNumber = @"phoneNumber"
+};
+
 @implementation SPCAddressBookFacade
 
 #pragma mark - Public
@@ -56,9 +61,9 @@
         if (contactsFromSource) {
             NSMutableArray *resultContacts = [[NSMutableArray alloc] init];
             for (id value in contactsFromSource) {
-                [resultContacts addObject:[[SPCAddressBookFacadeContact alloc] initWithDisplayName:[SPCAddressBookFacade displayNameForABRecordRef:value] emailAddresses:[SPCAddressBookFacade emailsForABRecordRef:value]]];
+                [resultContacts addObject:[[SPCAddressBookFacadeContact alloc] initWithDisplayName:[SPCAddressBookFacade displayNameForABRecordRef:value] avatar:[SPCAddressBookFacade avatarForABRecordRef:value] phoneNumber:[SPCAddressBookFacade phoneNumbersForABRecordRef:value] emailAddresses:[SPCAddressBookFacade emailsForABRecordRef:value]]];
             }
-            [contactRefs addObjectsFromArray:contactsFromSource];
+            [contactRefs addObjectsFromArray:resultContacts];
         }
     }
 
@@ -94,14 +99,6 @@
     return array;
 }
 
-+ (NSArray *)emailsForABRecordRef:(id)record {
-    ABMutableMultiValueRef emails = ABRecordCopyValue((__bridge ABRecordRef)record, kABPersonEmailProperty);
-    NSArray *emailsArray = [SPCAddressBookFacade arrayFromABMutableMultiValueRef:emails];
-
-    if (emails) {CFRelease(emails); }
-    return emailsArray;
-}
-
 + (NSString *)displayNameForABRecordRef:(id)record {
     ABRecordRef thisContact = (__bridge ABRecordRef) record;
     CFTypeRef firstNameRef = ABRecordCopyValue(thisContact, kABPersonFirstNameProperty);
@@ -113,4 +110,37 @@
     return [NSString stringWithFormat:@"%@ %@", firstName ? :@"", lastName ? :@""];
 }
 
++ (UIImage *)avatarForABRecordRef:(id)record {
+    ABRecordRef thisContact = (__bridge ABRecordRef) record;
+    NSData  *imgData = (__bridge_transfer NSData *)ABPersonCopyImageDataWithFormat(thisContact, kABPersonImageFormatThumbnail);
+    return [UIImage imageWithData:imgData];
+}
+
++ (NSArray *)phoneNumbersForABRecordRef:(id)record {
+    NSMutableArray *phoneNumbers = [[NSMutableArray alloc] init];
+
+    ABRecordRef thisContact = (__bridge ABRecordRef) record;
+    ABMultiValueRef *phones = ABRecordCopyValue(thisContact, kABPersonPhoneProperty);
+
+    for(CFIndex j = 0; j < ABMultiValueGetCount(phones); j++)
+    {
+        CFStringRef phoneNumberRef = ABMultiValueCopyValueAtIndex(phones, j);
+        CFStringRef locLabel = ABMultiValueCopyLabelAtIndex(phones, j);
+        NSString *phoneLabel =(__bridge NSString*) ABAddressBookCopyLocalizedLabel(locLabel);
+        NSString *phoneNumber = (__bridge NSString *)phoneNumberRef;
+
+        CFRelease(phoneNumberRef);
+        CFRelease(locLabel);
+        [phoneNumbers addObject:@{SPCAddressBookFacadePhoneNumbersListDictionaryKeys.phoneLabel : phoneLabel, SPCAddressBookFacadePhoneNumbersListDictionaryKeys.phoneNumber : phoneNumber}];
+    }
+    return phoneNumbers;
+}
+
++ (NSArray *)emailsForABRecordRef:(id)record {
+    ABMutableMultiValueRef emails = ABRecordCopyValue((__bridge ABRecordRef)record, kABPersonEmailProperty);
+    NSArray *emailsArray = [SPCAddressBookFacade arrayFromABMutableMultiValueRef:emails];
+
+    if (emails) {CFRelease(emails); }
+    return emailsArray;
+}
 @end

@@ -14,6 +14,12 @@ typedef NS_ENUM (NSInteger, SPCAddressBookFacadeStatus) {
     SPCAddressBookFacadeStatusDenied,            // User has explicitly denied this application access to address book.
     SPCAddressBookFacadeStatusAuthorized         // User has authorized this application to access address book.
 };
+
+extern const struct SPCAddressBookFacadePhoneNumbersListDictionaryKeys {
+    __unsafe_unretained NSString *phoneLabel;
+    __unsafe_unretained NSString *phoneNumber;
+} SPCAddressBookFacadePhoneNumbersListDictionaryKeys;
+
 /**
  * This is a facade for the AddressBook API.
  * The AddressBook API is very old and it is written in C, this facade should somehow ease the pain.

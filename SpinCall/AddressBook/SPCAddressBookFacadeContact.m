@@ -11,10 +11,12 @@
 
 @implementation SPCAddressBookFacadeContact
 
-- (instancetype)initWithDisplayName:(NSString *)displayName emailAddresses:(NSArray *)emailAddresses {
+- (instancetype)initWithDisplayName:(NSString *)displayName avatar:(UIImage *)avatar phoneNumber:(NSArray *)phoneNumbers emailAddresses:(NSArray *)emailAddresses {
     self = [super init];
     if (self) {
         self.displayName = displayName;
+        self.avatar = avatar;
+        self.phoneNumbers = phoneNumbers;
         self.emailAddresses = emailAddresses;
     }
     return self;
