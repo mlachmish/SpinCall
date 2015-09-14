@@ -9,7 +9,9 @@
 
 static CGFloat const kAvatarGutter = 70.0;
 static CGFloat const kAvatarDiameter = 230.0;
-static CGFloat const kMargin = 15.0;
+static CGFloat const kNameGutter = 30.0;
+static CGFloat const kPhonesGutter = 10.0;
+static CGFloat const kPhonesMargin = 15.0;
 
 typedef NS_ENUM (NSInteger, SPCContactViewPhoneLabelTags) {
     SPCContactViewPhoneLabelTagPrimary,
@@ -34,9 +36,11 @@ typedef NS_ENUM (NSInteger, SPCContactViewPhoneLabelTags) {
     self = [super initWithFrame:frame];
     if (self) {
         _avatarView = [[SPCAvatarImageView alloc] init];
+        _avatarView.foregroundColor = [UIColor lightGrayColor];
         [self addSubview:_avatarView];
 
         _nameLabel = [[UILabel alloc] init];
+        _nameLabel.font = [UIFont systemFontOfSize:24.0];
         [self addSubview:_nameLabel];
 
         _primaryPhoneLabelLabel = [[UILabel alloc] init];
@@ -68,19 +72,19 @@ typedef NS_ENUM (NSInteger, SPCContactViewPhoneLabelTags) {
 - (void)layoutSubviews {
     self.avatarView.frame = CGRectMake(self.center.x - self.avatarView.width/2, kAvatarGutter, kAvatarDiameter, kAvatarDiameter);
 
-    self.nameLabel.frame = CGRectMake(self.center.x - self.nameLabel.width/2, self.avatarView.bottom + 2*kMargin, 0, 0);
+    self.nameLabel.frame = CGRectMake(self.center.x - self.nameLabel.width/2, self.avatarView.bottom + kNameGutter, 0, 0);
     [self.nameLabel sizeToFit];
 
-    self.primaryPhoneLabelLabel.frame = CGRectMake(self.center.x - (self.primaryPhoneLabelLabel.width+self.primaryPhoneNumberLabel.width + kMargin)/2, self.nameLabel.bottom + kMargin, 0, 0);
+    self.primaryPhoneLabelLabel.frame = CGRectMake(self.center.x - (self.primaryPhoneLabelLabel.width+self.primaryPhoneNumberLabel.width + kPhonesMargin)/2, self.nameLabel.bottom + kPhonesGutter, 0, 0);
     [self.primaryPhoneLabelLabel sizeToFit];
 
-    self.primaryPhoneNumberLabel.frame = CGRectMake(self.primaryPhoneLabelLabel.right + kMargin, self.primaryPhoneLabelLabel.top, 0, 0);
+    self.primaryPhoneNumberLabel.frame = CGRectMake(self.primaryPhoneLabelLabel.right + kPhonesMargin, self.primaryPhoneLabelLabel.top, 0, 0);
     [self.primaryPhoneNumberLabel sizeToFit];
 
-    self.secondaryPhoneLabelLabel.frame = CGRectMake(self.center.x - (self.secondaryPhoneLabelLabel.width+self.secondaryPhoneNumberLabel.width + kMargin)/2, self.primaryPhoneLabelLabel.bottom + kMargin, 0, 0);
+    self.secondaryPhoneLabelLabel.frame = CGRectMake(self.center.x - (self.secondaryPhoneLabelLabel.width+self.secondaryPhoneNumberLabel.width + kPhonesMargin)/2, self.primaryPhoneLabelLabel.bottom + kPhonesMargin, 0, 0);
     [self.secondaryPhoneLabelLabel sizeToFit];
 
-    self.secondaryPhoneNumberLabel.frame = CGRectMake(self.secondaryPhoneLabelLabel.right + kMargin, self.secondaryPhoneLabelLabel.top, 0, 0);
+    self.secondaryPhoneNumberLabel.frame = CGRectMake(self.secondaryPhoneLabelLabel.right + kPhonesMargin, self.secondaryPhoneLabelLabel.top, 0, 0);
     [self.secondaryPhoneNumberLabel sizeToFit];
 }
 
