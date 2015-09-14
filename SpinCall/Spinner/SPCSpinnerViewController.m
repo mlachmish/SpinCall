@@ -18,16 +18,34 @@ static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
 @interface SPCSpinnerViewController () <SPCContactViewDelegate>
 
 @property (strong, nonatomic) NSArray *contacts;
+@property (strong, nonatomic) UIImageView *backgroundImageView;
 @property (strong, nonatomic) SPCContactView *contactView;
 
 @end
 
 @implementation SPCSpinnerViewController
 
+#pragma mark - Lifecycle
+
 - (void)viewDidLoad {
     [super viewDidLoad];
 
     self.view.backgroundColor = [UIColor whiteColor];
+
+    _backgroundImageView = [[UIImageView alloc] init];
+    [self.view addSubview:_backgroundImageView];
+
+    if (!UIAccessibilityIsReduceTransparencyEnabled()) {
+        self.view.backgroundColor = [UIColor clearColor];
+
+        UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleExtraLight];
+        UIVisualEffectView *blurEffectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
+        blurEffectView.frame = self.view.bounds;
+        blurEffectView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+
+        [self.view addSubview:blurEffectView];
+    }
+
     _contactView = [[SPCContactView alloc] initWithFrame:self.view.frame];
     _contactView.delegate = self;
     [self.view addSubview:_contactView];
@@ -66,14 +84,19 @@ static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
 
 - (void)loadRandomContact {
     SPCAddressBookFacadeContact *randomContact = [self getRandomContact];
-    _contactView.name = randomContact.displayName;
-    _contactView.avatar = randomContact.avatar;
-    _contactView.primaryPhoneLabel = randomContact.phoneNumbers.firstObject[SPCAddressBookFacadePhoneNumbersListDictionaryKeys.phoneLabel];
-    _contactView.primaryPhoneNumber = randomContact.phoneNumbers.firstObject[SPCAddressBookFacadePhoneNumbersListDictionaryKeys.phoneNumber];
+
+    self.backgroundImageView.image = randomContact.avatar;
+    self.backgroundImageView.frame = CGRectMake(self.view.center.x,0,0,0);
+    [self.backgroundImageView sizeToFit];
+
+    self.contactView.name = randomContact.displayName;
+    self.contactView.avatar = randomContact.avatar;
+    self.contactView.primaryPhoneLabel = randomContact.phoneNumbers.firstObject[SPCAddressBookFacadePhoneNumbersListDictionaryKeys.phoneLabel];
+    self.contactView.primaryPhoneNumber = randomContact.phoneNumbers.firstObject[SPCAddressBookFacadePhoneNumbersListDictionaryKeys.phoneNumber];
 
     if (randomContact.phoneNumbers.count > 1) {
-        _contactView.secondaryPhoneLabel = randomContact.phoneNumbers.lastObject[SPCAddressBookFacadePhoneNumbersListDictionaryKeys.phoneLabel];
-        _contactView.secondaryPhoneNumber = randomContact.phoneNumbers.lastObject[SPCAddressBookFacadePhoneNumbersListDictionaryKeys.phoneNumber];
+        self.contactView.secondaryPhoneLabel = randomContact.phoneNumbers.lastObject[SPCAddressBookFacadePhoneNumbersListDictionaryKeys.phoneLabel];
+        self.contactView.secondaryPhoneNumber = randomContact.phoneNumbers.lastObject[SPCAddressBookFacadePhoneNumbersListDictionaryKeys.phoneNumber];
     }
 }
 
