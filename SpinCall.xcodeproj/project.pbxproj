@@ -7,13 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		62DD9236226A4A3B0302F989 /* SPCContactView.m in Sources */ = {isa = PBXBuildFile; fileRef = 62DD9E10D32F568BEF1E03B3 /* SPCContactView.m */; };
+		62DD9375EC6EB9ADBE8DD1EC /* SPCSpinnerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 62DD97DE2EA51E008DB1227A /* SPCSpinnerViewController.m */; };
 		62DD940DFFD64BC9DEDC7CD0 /* SPCAddressBookFacadeContact.m in Sources */ = {isa = PBXBuildFile; fileRef = 62DD91D670280EC93E3892DA /* SPCAddressBookFacadeContact.m */; };
+		62DD9417D087E70141477975 /* SPCAvatarImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 62DD9D8A22FB59FABEF89329 /* SPCAvatarImageView.m */; };
 		62DD96661DB44707A2F4355B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 62DD97C5866CFB6B162D77DF /* Images.xcassets */; };
+		62DD97B949A84E109B6F6E94 /* UIView+Shortcuts.m in Sources */ = {isa = PBXBuildFile; fileRef = 62DD9A76A78D49E60AA309FD /* UIView+Shortcuts.m */; };
 		62DD99CEDBCE558E03D569E6 /* SPCAddressBookFacade.m in Sources */ = {isa = PBXBuildFile; fileRef = 62DD9427BF09126E5C8AF007 /* SPCAddressBookFacade.m */; };
 		734CD838061D912682822C3D /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BF7697983E04C6119A6BC6C7 /* libPods.a */; };
 		90FC839E1BA387040036B15D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 90FC839D1BA387040036B15D /* main.m */; };
 		90FC83A11BA387040036B15D /* SPCAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 90FC83A01BA387040036B15D /* SPCAppDelegate.m */; };
-		90FC83A41BA387040036B15D /* SPCSpinnerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 90FC83A31BA387040036B15D /* SPCSpinnerViewController.m */; };
 		90FC83B81BA387040036B15D /* SpinCallTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 90FC83B71BA387040036B15D /* SpinCallTests.m */; };
 /* End PBXBuildFile section */
 
@@ -30,17 +33,23 @@
 /* Begin PBXFileReference section */
 		34B9D4C6F0553B4B2BC7321D /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		62DD91D670280EC93E3892DA /* SPCAddressBookFacadeContact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPCAddressBookFacadeContact.m; sourceTree = "<group>"; };
+		62DD924C2035698411C2B9A3 /* SPCContactView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPCContactView.h; sourceTree = "<group>"; };
+		62DD93ABD2EDDB5AB142A1AE /* UIView+Shortcuts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Shortcuts.h"; sourceTree = "<group>"; };
 		62DD9427BF09126E5C8AF007 /* SPCAddressBookFacade.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPCAddressBookFacade.m; sourceTree = "<group>"; };
 		62DD94333B0DFFE67754CC8E /* SPCAddressBookFacadeContact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPCAddressBookFacadeContact.h; sourceTree = "<group>"; };
 		62DD97C5866CFB6B162D77DF /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		62DD97DE2EA51E008DB1227A /* SPCSpinnerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPCSpinnerViewController.m; sourceTree = "<group>"; };
 		62DD992B0A35142ECBC2F1B1 /* SPCAddressBookFacade.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPCAddressBookFacade.h; sourceTree = "<group>"; };
+		62DD9A76A78D49E60AA309FD /* UIView+Shortcuts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Shortcuts.m"; sourceTree = "<group>"; };
+		62DD9D2A6E59F964A769F118 /* SPCAvatarImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPCAvatarImageView.h; sourceTree = "<group>"; };
+		62DD9D86EC3B436ECB651808 /* SPCSpinnerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPCSpinnerViewController.h; sourceTree = "<group>"; };
+		62DD9D8A22FB59FABEF89329 /* SPCAvatarImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPCAvatarImageView.m; sourceTree = "<group>"; };
+		62DD9E10D32F568BEF1E03B3 /* SPCContactView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPCContactView.m; sourceTree = "<group>"; };
 		90FC83981BA387040036B15D /* SpinCall.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpinCall.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		90FC839C1BA387040036B15D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		90FC839D1BA387040036B15D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		90FC839F1BA387040036B15D /* SPCAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SPCAppDelegate.h; sourceTree = "<group>"; };
 		90FC83A01BA387040036B15D /* SPCAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SPCAppDelegate.m; sourceTree = "<group>"; };
-		90FC83A21BA387040036B15D /* SPCSpinnerViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SPCSpinnerViewController.h; sourceTree = "<group>"; };
-		90FC83A31BA387040036B15D /* SPCSpinnerViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SPCSpinnerViewController.m; sourceTree = "<group>"; };
 		90FC83B11BA387040036B15D /* SpinCallTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpinCallTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		90FC83B61BA387040036B15D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		90FC83B71BA387040036B15D /* SpinCallTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SpinCallTests.m; sourceTree = "<group>"; };
@@ -74,6 +83,28 @@
 				CD228B3E1B4683A5277A75F1 /* Pods.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		62DD9071A27ED46379AA4EF5 /* Spinner */ = {
+			isa = PBXGroup;
+			children = (
+				62DD97DE2EA51E008DB1227A /* SPCSpinnerViewController.m */,
+				62DD9D86EC3B436ECB651808 /* SPCSpinnerViewController.h */,
+				62DD9E10D32F568BEF1E03B3 /* SPCContactView.m */,
+				62DD924C2035698411C2B9A3 /* SPCContactView.h */,
+				62DD9D8A22FB59FABEF89329 /* SPCAvatarImageView.m */,
+				62DD9D2A6E59F964A769F118 /* SPCAvatarImageView.h */,
+			);
+			path = Spinner;
+			sourceTree = "<group>";
+		};
+		62DD94460CC181D99FB88C0C /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				62DD9A76A78D49E60AA309FD /* UIView+Shortcuts.m */,
+				62DD93ABD2EDDB5AB142A1AE /* UIView+Shortcuts.h */,
+			);
+			path = Categories;
 			sourceTree = "<group>";
 		};
 		62DD952F2815B7BCFF043F4B /* AddressBook */ = {
@@ -112,10 +143,10 @@
 			children = (
 				90FC839F1BA387040036B15D /* SPCAppDelegate.h */,
 				90FC83A01BA387040036B15D /* SPCAppDelegate.m */,
-				90FC83A21BA387040036B15D /* SPCSpinnerViewController.h */,
-				90FC83A31BA387040036B15D /* SPCSpinnerViewController.m */,
 				90FC839B1BA387040036B15D /* Supporting Files */,
 				62DD952F2815B7BCFF043F4B /* AddressBook */,
+				62DD9071A27ED46379AA4EF5 /* Spinner */,
+				62DD94460CC181D99FB88C0C /* Categories */,
 			);
 			path = SpinCall;
 			sourceTree = "<group>";
@@ -288,11 +319,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				90FC83A41BA387040036B15D /* SPCSpinnerViewController.m in Sources */,
 				90FC83A11BA387040036B15D /* SPCAppDelegate.m in Sources */,
 				90FC839E1BA387040036B15D /* main.m in Sources */,
 				62DD99CEDBCE558E03D569E6 /* SPCAddressBookFacade.m in Sources */,
 				62DD940DFFD64BC9DEDC7CD0 /* SPCAddressBookFacadeContact.m in Sources */,
+				62DD9375EC6EB9ADBE8DD1EC /* SPCSpinnerViewController.m in Sources */,
+				62DD9236226A4A3B0302F989 /* SPCContactView.m in Sources */,
+				62DD97B949A84E109B6F6E94 /* UIView+Shortcuts.m in Sources */,
+				62DD9417D087E70141477975 /* SPCAvatarImageView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
