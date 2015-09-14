@@ -129,9 +129,9 @@ const struct SPCAddressBookFacadePhoneNumbersListDictionaryKeys SPCAddressBookFa
         NSString *phoneLabel =(__bridge NSString*) ABAddressBookCopyLocalizedLabel(locLabel);
         NSString *phoneNumber = (__bridge NSString *)phoneNumberRef;
 
-        CFRelease(phoneNumberRef);
-        CFRelease(locLabel);
-        [phoneNumbers addObject:@{SPCAddressBookFacadePhoneNumbersListDictionaryKeys.phoneLabel : phoneLabel, SPCAddressBookFacadePhoneNumbersListDictionaryKeys.phoneNumber : phoneNumber}];
+        if (phoneNumberRef) {CFRelease(phoneNumberRef);}
+        if (locLabel) {CFRelease(locLabel);}
+        if (phoneNumberRef && locLabel) {[phoneNumbers addObject:@{SPCAddressBookFacadePhoneNumbersListDictionaryKeys.phoneLabel : phoneLabel, SPCAddressBookFacadePhoneNumbersListDictionaryKeys.phoneNumber : phoneNumber}];}
     }
     return phoneNumbers;
 }
