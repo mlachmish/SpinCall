@@ -33,11 +33,11 @@ static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
 
     [self requestAddressBookPermissionIfNeeded];
 
-    SPCAddressBookFacadeContact *randomContact = [self getRandomContact];
-    _contactView.name = randomContact.displayName;
-    _contactView.avatar = randomContact.avatar;
-    _contactView.phoneLabel = randomContact.phoneNumbers.firstObject[SPCAddressBookFacadePhoneNumbersListDictionaryKeys.phoneLabel];
-    _contactView.phoneNumber = randomContact.phoneNumbers.firstObject[SPCAddressBookFacadePhoneNumbersListDictionaryKeys.phoneNumber];
+    [self loadRandomContact];
+
+    UITapGestureRecognizer *singleFingerTap = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                                      action:@selector(handleSingleTap:)];
+    [self.view addGestureRecognizer:singleFingerTap];
 }
 
 #pragma mark - Custom Accessors
@@ -67,4 +67,15 @@ static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
     return self.contacts[randomContactIndex];
 }
 
+- (void)loadRandomContact {
+    SPCAddressBookFacadeContact *randomContact = [self getRandomContact];
+    _contactView.name = randomContact.displayName;
+    _contactView.avatar = randomContact.avatar;
+    _contactView.phoneLabel = randomContact.phoneNumbers.firstObject[SPCAddressBookFacadePhoneNumbersListDictionaryKeys.phoneLabel];
+    _contactView.phoneNumber = randomContact.phoneNumbers.firstObject[SPCAddressBookFacadePhoneNumbersListDictionaryKeys.phoneNumber];
+}
+
+- (void)handleSingleTap:(UITapGestureRecognizer *)recognizer {
+    [self loadRandomContact];
+}
 @end
