@@ -9,6 +9,7 @@
 
 @property (strong, nonatomic) UIImage *avatar;
 @property (strong, nonatomic) NSString *name;
+@property (strong, nonatomic) NSString *phoneLabel;
 @property (strong, nonatomic) NSString *phoneNumber;
 
 @end

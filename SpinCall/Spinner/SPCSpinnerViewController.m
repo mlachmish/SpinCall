@@ -36,6 +36,7 @@ static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
     SPCAddressBookFacadeContact *randomContact = [self getRandomContact];
     _contactView.name = randomContact.displayName;
     _contactView.avatar = randomContact.avatar;
+    _contactView.phoneLabel = randomContact.phoneNumbers.firstObject[SPCAddressBookFacadePhoneNumbersListDictionaryKeys.phoneLabel];
     _contactView.phoneNumber = randomContact.phoneNumbers.firstObject[SPCAddressBookFacadePhoneNumbersListDictionaryKeys.phoneNumber];
 }
 

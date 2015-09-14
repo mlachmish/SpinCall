@@ -14,6 +14,7 @@ static CGFloat const kMargin = 15.0;
 @interface SPCContactView ()
 
 @property (strong, nonatomic) UILabel *nameLabel;
+@property (strong, nonatomic) UILabel *phoneLabelLabel;
 @property (strong, nonatomic) UILabel *phoneNumberLabel;
 @property (strong, nonatomic) SPCAvatarImageView *avatarView;
 
@@ -32,6 +33,9 @@ static CGFloat const kMargin = 15.0;
         _nameLabel = [[UILabel alloc] init];
         [self addSubview:_nameLabel];
 
+        _phoneLabelLabel = [[UILabel alloc] init];
+        [self addSubview:_phoneLabelLabel];
+
         _phoneNumberLabel = [[UILabel alloc] init];
         [self addSubview:_phoneNumberLabel];
     }
@@ -44,7 +48,10 @@ static CGFloat const kMargin = 15.0;
     self.nameLabel.frame = CGRectMake(self.center.x - self.nameLabel.width/2, self.avatarView.bottom + kMargin, 0, 0);
     [self.nameLabel sizeToFit];
 
-    self.phoneNumberLabel.frame = CGRectMake(self.center.x - self.phoneNumberLabel.width/2, self.nameLabel.bottom + kMargin, 0, 0);
+    self.phoneLabelLabel.frame = CGRectMake(self.center.x - (self.phoneLabelLabel.width+self.phoneNumberLabel.width + kMargin)/2, self.nameLabel.bottom + kMargin, 0, 0);
+    [self.phoneLabelLabel sizeToFit];
+
+    self.phoneNumberLabel.frame = CGRectMake(self.phoneLabelLabel.right + kMargin, self.phoneLabelLabel.top, 0, 0);
     [self.phoneNumberLabel sizeToFit];
 }
 
@@ -58,6 +65,12 @@ static CGFloat const kMargin = 15.0;
         [self.avatarView setAvatarName:self.name];
     }
 
+    [self layoutSubviews];
+}
+
+- (void)setPhoneLabel:(NSString *)phoneLabel {
+    _phoneLabel = phoneLabel;
+    self.phoneLabelLabel.text = phoneLabel;
     [self layoutSubviews];
 }
 
