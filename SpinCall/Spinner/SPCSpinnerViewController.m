@@ -11,6 +11,7 @@
 #import "SPCAddressBookFacade.h"
 #import "SPCContactView.h"
 #import "SPCAddressBookFacadeContact.h"
+#import "EXTScope.h"
 
 //TODO: refactor logging
 static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
@@ -18,6 +19,7 @@ static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
 @interface SPCSpinnerViewController () <SPCContactViewDelegate>
 
 @property (strong, nonatomic) NSArray *contacts;
+@property (strong, nonatomic) SPCAddressBookFacadeContact *currentDisplayedContact;
 @property (assign, nonatomic) SPCAddressBookFacadeStatus addressBookAuthorizationStatus;
 
 @property (strong, nonatomic) UIImageView *backgroundImageView;
@@ -99,20 +101,20 @@ static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
 }
 
 - (void)loadRandomContact {
-    SPCAddressBookFacadeContact *randomContact = [self getRandomContact];
+    self.currentDisplayedContact = [self getRandomContact];
 
-    self.backgroundImageView.image = randomContact.avatar;
+    self.backgroundImageView.image = self.currentDisplayedContact.avatar;
     self.backgroundImageView.frame = CGRectMake(self.view.center.x,0,0,0);
     [self.backgroundImageView sizeToFit];
 
-    self.contactView.name = randomContact.displayName;
-    self.contactView.avatar = randomContact.avatar;
-    self.contactView.primaryPhoneLabel = randomContact.phoneNumbers.firstObject[SPCAddressBookFacadePhoneNumbersListDictionaryKeys.phoneLabel];
-    self.contactView.primaryPhoneNumber = randomContact.phoneNumbers.firstObject[SPCAddressBookFacadePhoneNumbersListDictionaryKeys.phoneNumber];
+    self.contactView.name = self.currentDisplayedContact.displayName;
+    self.contactView.avatar = self.currentDisplayedContact.avatar;
+    self.contactView.primaryPhoneLabel = self.currentDisplayedContact.phoneNumbers.firstObject[SPCAddressBookFacadePhoneNumbersListDictionaryKeys.phoneLabel];
+    self.contactView.primaryPhoneNumber = self.currentDisplayedContact.phoneNumbers.firstObject[SPCAddressBookFacadePhoneNumbersListDictionaryKeys.phoneNumber];
 
-    if (randomContact.phoneNumbers.count > 1) {
-        self.contactView.secondaryPhoneLabel = randomContact.phoneNumbers.lastObject[SPCAddressBookFacadePhoneNumbersListDictionaryKeys.phoneLabel];
-        self.contactView.secondaryPhoneNumber = randomContact.phoneNumbers.lastObject[SPCAddressBookFacadePhoneNumbersListDictionaryKeys.phoneNumber];
+    if (self.currentDisplayedContact.phoneNumbers.count > 1) {
+        self.contactView.secondaryPhoneLabel = self.currentDisplayedContact.phoneNumbers.lastObject[SPCAddressBookFacadePhoneNumbersListDictionaryKeys.phoneLabel];
+        self.contactView.secondaryPhoneNumber = self.currentDisplayedContact.phoneNumbers.lastObject[SPCAddressBookFacadePhoneNumbersListDictionaryKeys.phoneNumber];
     } else {
         self.contactView.secondaryPhoneLabel = nil;
         self.contactView.secondaryPhoneNumber = nil;
@@ -130,5 +132,24 @@ static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
 - (void)tappedOutSide {
     [self loadRandomContact];
 }
+
+- (void)longTappedOutSide{
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Delete Contact!" message:@"Are you sure you want to delete this contact from your Address Book?" preferredStyle:UIAlertControllerStyleAlert];
+
+    @weakify(self);
+    UIAlertAction *yesAction = [UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
+        @strongify(self);
+        DDLogDebug(@"Deleting contact: %@ %@", self.currentDisplayedContact.firstName, self.currentDisplayedContact.lastName);
+        [SPCAddressBookFacade deleteContactWithFirstName:self.currentDisplayedContact.firstName lastName:self.currentDisplayedContact.lastName];
+        [self loadRandomContact];
+    }];
+    [alertController addAction:yesAction];
+
+    UIAlertAction*nolAction = [UIAlertAction actionWithTitle:@"No" style:UIAlertActionStyleCancel handler:nil];
+    [alertController addAction:nolAction];
+
+    [self presentViewController:alertController animated:YES completion:nil];
+}
+
 
 @end

@@ -10,6 +10,7 @@
 @optional
 
 - (void)tappedOutSide;
+- (void)longTappedOutSide;
 - (void)phoneNumberLabelTapped:(NSString *)phoneNumber;
 
 @end

@@ -63,8 +63,12 @@ typedef NS_ENUM (NSInteger, SPCContactViewPhoneLabelTags) {
         _secondaryPhoneNumberLabel.userInteractionEnabled = YES;
         [self addSubview:_secondaryPhoneNumberLabel];
 
-        UITapGestureRecognizer *tappedOutSideGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSingleTap:)];
+        UITapGestureRecognizer *tappedOutSideGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapOutSide:)];
         [self addGestureRecognizer:tappedOutSideGesture];
+
+        UILongPressGestureRecognizer *longTappedOutSideGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongTapOutSide:)];
+        longTappedOutSideGesture.minimumPressDuration = 1;
+        [self addGestureRecognizer:longTappedOutSideGesture];
     }
     return self;
 }
@@ -139,8 +143,12 @@ typedef NS_ENUM (NSInteger, SPCContactViewPhoneLabelTags) {
 
 #pragma mark - Private
 
-- (void)handleSingleTap:(UITapGestureRecognizer *)recognizer {
+- (void)handleTapOutSide:(UITapGestureRecognizer *)recognizer {
     [self.delegate tappedOutSide];
+}
+
+- (void)handleLongTapOutSide:(UITapGestureRecognizer *)recognizer {
+    [self.delegate longTappedOutSide];
 }
 
 - (void)phoneNumberLabelTapped:(UITapGestureRecognizer *)recognizer {
