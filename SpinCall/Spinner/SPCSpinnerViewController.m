@@ -18,6 +18,8 @@ static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
 @interface SPCSpinnerViewController () <SPCContactViewDelegate>
 
 @property (strong, nonatomic) NSArray *contacts;
+@property (assign, nonatomic) SPCAddressBookFacadeStatus addressBookAuthorizationStatus;
+
 @property (strong, nonatomic) UIImageView *backgroundImageView;
 @property (strong, nonatomic) SPCContactView *contactView;
 
@@ -50,9 +52,8 @@ static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
     _contactView.delegate = self;
     [self.view addSubview:_contactView];
 
+    self.addressBookAuthorizationStatus = [SPCAddressBookFacade addressBookAuthorizationStatus];
     [self requestAddressBookPermissionIfNeeded];
-
-    [self loadRandomContact];
 }
 
 #pragma mark - Custom Accessors
@@ -65,6 +66,20 @@ static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
     return _contacts;
 }
 
+#pragma mark - Custom Setters
+
+- (void)setAddressBookAuthorizationStatus:(SPCAddressBookFacadeStatus)addressBookAuthorizationStatus {
+    _addressBookAuthorizationStatus = addressBookAuthorizationStatus;
+
+    if (addressBookAuthorizationStatus == SPCAddressBookFacadeStatusAuthorized) {
+        self.view.userInteractionEnabled = YES;
+        [self loadRandomContact];
+    } else {
+        //display 'please update permissions' screen
+        self.view.userInteractionEnabled = NO;
+    }
+}
+
 #pragma mark - Private
 
 - (void)requestAddressBookPermissionIfNeeded {
@@ -72,7 +87,8 @@ static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
             && [SPCAddressBookFacade addressBookAuthorizationStatus] != SPCAddressBookFacadeStatusAuthorized) {
         DDLogDebug(@"Requesting contacts access");
         [SPCAddressBookFacade requestAuthorization:^(SPCAddressBookFacadeStatus status) {
-            DDLogDebug(@"Contacts access greanted");
+            DDLogDebug(@"Contacts access set to %d", status);
+            self.addressBookAuthorizationStatus = [SPCAddressBookFacade addressBookAuthorizationStatus];
         }];
     }
 }
