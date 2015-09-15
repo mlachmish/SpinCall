@@ -112,7 +112,7 @@ static NSString *const kFontHelveticaNeueLight = @"HelveticaNeue-Light";
 
     for (NSString *partialName in splitUserName) {
         if ([partialName stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]].length > 0) {
-            [initials appendString:[NSString stringWithFormat:@"%c", [partialName characterAtIndex:0]]];
+            [initials appendString:[partialName substringToIndex:1]];
 
             if (initials.length == 2) {
                 break;
