@@ -18,9 +18,10 @@
 @property (nonatomic, strong) NSString *firstName;
 @property (nonatomic, strong) NSString *lastName;
 @property (nonatomic, strong, readonly) NSString *displayName;
-@property (nonatomic, strong) UIImage *avatar;
+@property (nonatomic, strong) UIImage *thumbnailAvatar;
+@property (nonatomic, strong) UIImage *originalSizeAvatar;
 @property (nonatomic, strong) NSArray *phoneNumbers;
 @property (nonatomic, strong) NSArray *emailAddresses;
 
-- (instancetype)initWithFirstName:(NSString *)firstName lastName:(NSString *)lastName avatar:(UIImage *)avatar phoneNumber:(NSArray *)phoneNumbers emailAddresses:(NSArray *)emailAddresses;
+- (instancetype)initWithFirstName:(NSString *)firstName lastName:(NSString *)lastName thumbnailAvatar:(UIImage *)thumbnailAvatar originalSizeAvatar:(UIImage *)originalSizeAvatar phoneNumber:(NSArray *)phoneNumbers emailAddresses:(NSArray *)emailAddresses;
 @end

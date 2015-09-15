@@ -86,7 +86,7 @@ void addressBookExternalChangeCallback() {
         if (contactsFromSource) {
             NSMutableArray *resultContacts = [[NSMutableArray alloc] init];
             for (id value in contactsFromSource) {
-                [resultContacts addObject:[[SPCAddressBookFacadeContact alloc] initWithFirstName:[SPCAddressBookFacade firstNameForABRecordRef:value] lastName:[SPCAddressBookFacade lastNameForABRecordRef:value] avatar:[SPCAddressBookFacade avatarForABRecordRef:value] phoneNumber:[SPCAddressBookFacade phoneNumbersForABRecordRef:value] emailAddresses:[SPCAddressBookFacade emailsForABRecordRef:value]]];
+                [resultContacts addObject:[[SPCAddressBookFacadeContact alloc] initWithFirstName:[SPCAddressBookFacade firstNameForABRecordRef:value] lastName:[SPCAddressBookFacade lastNameForABRecordRef:value] thumbnailAvatar:[SPCAddressBookFacade thumbnailAvatarForABRecordRef:value] originalSizeAvatar:[SPCAddressBookFacade originalSizeAvatarForABRecordRef:value] phoneNumber:[SPCAddressBookFacade phoneNumbersForABRecordRef:value] emailAddresses:[SPCAddressBookFacade emailsForABRecordRef:value]]];
             }
             [contactRefs addObjectsFromArray:resultContacts];
         }
@@ -161,9 +161,15 @@ void addressBookExternalChangeCallback() {
     return (__bridge_transfer NSString *) lastNameRef;
 }
 
-+ (UIImage *)avatarForABRecordRef:(id)record {
++ (UIImage *)thumbnailAvatarForABRecordRef:(id)record {
     ABRecordRef thisContact = (__bridge ABRecordRef) record;
     NSData  *imgData = (__bridge_transfer NSData *)ABPersonCopyImageDataWithFormat(thisContact, kABPersonImageFormatThumbnail);
+    return [UIImage imageWithData:imgData];
+}
+
++ (UIImage *)originalSizeAvatarForABRecordRef:(id)record {
+    ABRecordRef thisContact = (__bridge ABRecordRef) record;
+    NSData  *imgData = (__bridge_transfer NSData *)ABPersonCopyImageDataWithFormat(thisContact, kABPersonImageFormatOriginalSize);
     return [UIImage imageWithData:imgData];
 }
 

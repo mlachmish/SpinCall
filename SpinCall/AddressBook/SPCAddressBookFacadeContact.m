@@ -13,12 +13,13 @@
 
 #pragma mark - Lifecycle
 
-- (instancetype)initWithFirstName:(NSString *)firstName lastName:(NSString *)lastName avatar:(UIImage *)avatar phoneNumber:(NSArray *)phoneNumbers emailAddresses:(NSArray *)emailAddresses {
+- (instancetype)initWithFirstName:(NSString *)firstName lastName:(NSString *)lastName thumbnailAvatar:(UIImage *)thumbnailAvatar originalSizeAvatar:(UIImage *)originalSizeAvatar phoneNumber:(NSArray *)phoneNumbers emailAddresses:(NSArray *)emailAddresses {
     self = [super init];
     if (self) {
         self.firstName = firstName;
         self.lastName = lastName;
-        self.avatar = avatar;
+        self.thumbnailAvatar = thumbnailAvatar;
+        self.originalSizeAvatar = originalSizeAvatar;
         self.phoneNumbers = phoneNumbers;
         self.emailAddresses = emailAddresses;
     }
