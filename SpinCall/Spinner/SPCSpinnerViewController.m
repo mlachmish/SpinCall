@@ -27,7 +27,9 @@ static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
 
 @end
 
-@implementation SPCSpinnerViewController
+@implementation SPCSpinnerViewController {
+    BOOL _isContactListInvalid;
+}
 
 #pragma mark - Lifecycle
 
@@ -56,12 +58,18 @@ static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
 
     self.addressBookAuthorizationStatus = [SPCAddressBookFacade addressBookAuthorizationStatus];
     [self requestAddressBookPermissionIfNeeded];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(handleAddressBookChangedNotification:) name:SPCAddressBookFacadeAddressBookChangedNotification object:nil];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark - Custom Accessors
 
 - (NSArray *)contacts {
-    if (!_contacts) {
+    if (!_contacts || _isContactListInvalid) {
+        _isContactListInvalid = NO;
         _contacts = [SPCAddressBookFacade contactList];
         DDLogDebug(@"Found %ld contact records", _contacts.count);
     }
@@ -119,6 +127,11 @@ static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
         self.contactView.secondaryPhoneLabel = nil;
         self.contactView.secondaryPhoneNumber = nil;
     }
+}
+
+- (void)handleAddressBookChangedNotification:(NSNotification *)notification {
+    DDLogDebug(@"Recieved AddressBook changed notification");
+    _isContactListInvalid = YES;
 }
 
 #pragma mark - SPCContactViewDelegate

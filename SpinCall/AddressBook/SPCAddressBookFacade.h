@@ -20,6 +20,8 @@ extern const struct SPCAddressBookFacadePhoneNumbersListDictionaryKeys {
     __unsafe_unretained NSString *phoneNumber;
 } SPCAddressBookFacadePhoneNumbersListDictionaryKeys;
 
+extern NSString * const SPCAddressBookFacadeAddressBookChangedNotification;
+
 /**
  * This is a facade for the AddressBook API.
  * The AddressBook API is very old and it is written in C, this facade should somehow ease the pain.

@@ -16,7 +16,33 @@ const struct SPCAddressBookFacadePhoneNumbersListDictionaryKeys SPCAddressBookFa
         .phoneNumber = @"phoneNumber"
 };
 
+NSString * const SPCAddressBookFacadeAddressBookChangedNotification = @"SPCAddressBookFacadeAddressBookChangedNotification";
+
 @implementation SPCAddressBookFacade
+
+#pragma mark - Lifecycle
+
++ (void)initialize {
+    static SPCAddressBookFacade *sharedAddressBookFacade = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        sharedAddressBookFacade = [[self alloc] init];
+    });
+}
+
+- (id)init {
+    if (self = [super init]) {
+        ABAddressBookRef notificationAddressBook = ABAddressBookCreateWithOptions(NULL, NULL);
+        ABAddressBookRegisterExternalChangeCallback(notificationAddressBook, addressBookExternalChangeCallback, (__bridge void *)self);
+    }
+    return self;
+}
+
+#pragma mark - C style callbacks
+
+void addressBookExternalChangeCallback() {
+    [[NSNotificationCenter defaultCenter] postNotificationName:SPCAddressBookFacadeAddressBookChangedNotification object:nil];
+}
 
 #pragma mark - Public
 
@@ -49,7 +75,6 @@ const struct SPCAddressBookFacadePhoneNumbersListDictionaryKeys SPCAddressBookFa
         });
     });
 }
-
 
 + (NSArray *)contactList {
     NSMutableArray *contactRefs = [NSMutableArray array];
