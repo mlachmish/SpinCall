@@ -111,10 +111,13 @@ void addressBookExternalChangeCallback() {
         NSString *contactFirstName = [SPCAddressBookFacade firstNameForABRecordRef:obj];
         NSString *contactLastName = [SPCAddressBookFacade lastNameForABRecordRef:obj];
 
-        BOOL isMatch = [contactFirstName isEqualToString:firstName] && [contactLastName isEqualToString:lastName];
+        BOOL isFirstNameMatch = (firstName == nil && contactFirstName == nil) || ([contactFirstName isEqualToString:firstName]);
+        BOOL isLastNameMatch = (lastName == nil && contactLastName == nil) || ([contactLastName isEqualToString:lastName]);
+        BOOL isMatch = isFirstNameMatch && isLastNameMatch;
         if (isMatch) {
             contactToBeDeleted = (__bridge ABRecordRef)obj;
         }
+
         return isMatch;
     };
 
