@@ -109,8 +109,8 @@ void addressBookExternalChangeCallback() {
         NSString *contactFirstName = [SPCAddressBookFacade firstNameForABRecordRef:obj];
         NSString *contactLastName = [SPCAddressBookFacade lastNameForABRecordRef:obj];
 
-        BOOL isFirstNameMatch = (firstName == nil && contactFirstName == nil) || ([contactFirstName caseInsensitiveCompare:firstName] == NSOrderedSame);
-        BOOL isLastNameMatch = (lastName == nil && contactLastName == nil) || ([contactLastName caseInsensitiveCompare:lastName] == NSOrderedSame);
+        BOOL isFirstNameMatch = (firstName == nil && contactFirstName == nil) || ([contactFirstName localizedCaseInsensitiveCompare:firstName] == NSOrderedSame);
+        BOOL isLastNameMatch = (lastName == nil && contactLastName == nil) || ([contactLastName localizedCaseInsensitiveCompare:lastName] == NSOrderedSame);
         BOOL isMatch = isFirstNameMatch && isLastNameMatch;
         if (isMatch) {
             contactToBeDeleted = (__bridge ABRecordRef)obj;
