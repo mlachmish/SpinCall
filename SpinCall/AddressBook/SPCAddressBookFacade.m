@@ -61,7 +61,7 @@ const struct SPCAddressBookFacadePhoneNumbersListDictionaryKeys SPCAddressBookFa
         if (contactsFromSource) {
             NSMutableArray *resultContacts = [[NSMutableArray alloc] init];
             for (id value in contactsFromSource) {
-                [resultContacts addObject:[[SPCAddressBookFacadeContact alloc] initWithDisplayName:[SPCAddressBookFacade displayNameForABRecordRef:value] avatar:[SPCAddressBookFacade avatarForABRecordRef:value] phoneNumber:[SPCAddressBookFacade phoneNumbersForABRecordRef:value] emailAddresses:[SPCAddressBookFacade emailsForABRecordRef:value]]];
+                [resultContacts addObject:[[SPCAddressBookFacadeContact alloc] initWithFirstName:[SPCAddressBookFacade firstNameForABRecordRef:value] lastName:[SPCAddressBookFacade lastNameForABRecordRef:value] avatar:[SPCAddressBookFacade avatarForABRecordRef:value] phoneNumber:[SPCAddressBookFacade phoneNumbersForABRecordRef:value] emailAddresses:[SPCAddressBookFacade emailsForABRecordRef:value]]];
             }
             [contactRefs addObjectsFromArray:resultContacts];
         }
@@ -71,6 +71,43 @@ const struct SPCAddressBookFacadePhoneNumbersListDictionaryKeys SPCAddressBookFa
     if (addressBook) {CFRelease(addressBook); }
 
     return contactRefs;
+}
+
++ (BOOL)deleteContactWithFirstName:(NSString *)firstName lastName:(NSString *)lastName {
+    CFErrorRef error = nil;
+
+    ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(NULL, NULL);
+    NSArray *peopleArray = (__bridge NSArray *) ABAddressBookCopyArrayOfAllPeople(addressBook);
+
+    __block ABRecordRef contactToBeDeleted = ABPersonCreate();
+
+    //Contact matching predicate
+    BOOL (^predicate)(id obj, NSUInteger idx, BOOL *stop) = ^(id obj, NSUInteger idx, BOOL *stop) {
+        NSString *contactFirstName = [SPCAddressBookFacade firstNameForABRecordRef:obj];
+        NSString *contactLastName = [SPCAddressBookFacade lastNameForABRecordRef:obj];
+
+        BOOL isMatch = [contactFirstName isEqualToString:firstName] && [contactLastName isEqualToString:lastName];
+        if (isMatch) {
+            contactToBeDeleted = (__bridge ABRecordRef)obj;
+        }
+        return isMatch;
+    };
+
+    if ([peopleArray indexOfObjectPassingTest:predicate] != NSNotFound) {
+        BOOL didRemove = ABAddressBookRemoveRecord(addressBook, contactToBeDeleted, &error);
+        if (!didRemove) {
+            return NO;
+        }
+
+        BOOL didSave = ABAddressBookSave(addressBook, &error);
+        if (!didSave) {
+            return NO;
+        }
+
+        return YES;
+    }
+
+    return NO;
 }
 
 #pragma mark - Private
@@ -85,15 +122,18 @@ const struct SPCAddressBookFacadePhoneNumbersListDictionaryKeys SPCAddressBookFa
     return array;
 }
 
-+ (NSString *)displayNameForABRecordRef:(id)record {
++ (NSString *)firstNameForABRecordRef:(id)record {
     ABRecordRef thisContact = (__bridge ABRecordRef) record;
     CFTypeRef firstNameRef = ABRecordCopyValue(thisContact, kABPersonFirstNameProperty);
+
+    return (__bridge_transfer NSString *) firstNameRef;
+}
+
++ (NSString *)lastNameForABRecordRef:(id)record {
+    ABRecordRef thisContact = (__bridge ABRecordRef) record;
     CFTypeRef lastNameRef = ABRecordCopyValue(thisContact, kABPersonLastNameProperty);
 
-    NSString *firstName = (__bridge_transfer NSString *) firstNameRef;
-    NSString *lastName  = (__bridge_transfer NSString *) lastNameRef;
-
-    return [NSString stringWithFormat:@"%@ %@", firstName ? :@"", lastName ? :@""];
+    return (__bridge_transfer NSString *) lastNameRef;
 }
 
 + (UIImage *)avatarForABRecordRef:(id)record {

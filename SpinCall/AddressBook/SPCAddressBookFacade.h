@@ -41,4 +41,11 @@ extern const struct SPCAddressBookFacadePhoneNumbersListDictionaryKeys {
  */
 + (NSArray *)contactList;
 
+/**
+ *  Delete the first contact matching the parameters
+ *
+ *  @return a BOOL indicating if succeed deleting the contact
+ */
++ (BOOL)deleteContactWithFirstName:(NSString *)firstName lastName:(NSString *)lastName;
+
 @end

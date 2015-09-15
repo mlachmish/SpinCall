@@ -11,15 +11,24 @@
 
 @implementation SPCAddressBookFacadeContact
 
-- (instancetype)initWithDisplayName:(NSString *)displayName avatar:(UIImage *)avatar phoneNumber:(NSArray *)phoneNumbers emailAddresses:(NSArray *)emailAddresses {
+#pragma mark - Lifecycle
+
+- (instancetype)initWithFirstName:(NSString *)firstName lastName:(NSString *)lastName avatar:(UIImage *)avatar phoneNumber:(NSArray *)phoneNumbers emailAddresses:(NSArray *)emailAddresses {
     self = [super init];
     if (self) {
-        self.displayName = displayName;
+        self.firstName = firstName;
+        self.lastName = lastName;
         self.avatar = avatar;
         self.phoneNumbers = phoneNumbers;
         self.emailAddresses = emailAddresses;
     }
     return self;
+}
+
+#pragma mark - Private
+
+- (NSString *)displayName {
+    return [NSString stringWithFormat:@"%@ %@", self.firstName ? :@"", self.lastName ? :@""];
 }
 
 @end
