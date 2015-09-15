@@ -99,8 +99,6 @@ void addressBookExternalChangeCallback() {
 }
 
 + (BOOL)deleteContactWithFirstName:(NSString *)firstName lastName:(NSString *)lastName {
-    CFErrorRef error = nil;
-
     ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(NULL, NULL);
     NSArray *peopleArray = (__bridge NSArray *) ABAddressBookCopyArrayOfAllPeople(addressBook);
 
@@ -111,8 +109,8 @@ void addressBookExternalChangeCallback() {
         NSString *contactFirstName = [SPCAddressBookFacade firstNameForABRecordRef:obj];
         NSString *contactLastName = [SPCAddressBookFacade lastNameForABRecordRef:obj];
 
-        BOOL isFirstNameMatch = (firstName == nil && contactFirstName == nil) || ([contactFirstName isEqualToString:firstName]);
-        BOOL isLastNameMatch = (lastName == nil && contactLastName == nil) || ([contactLastName isEqualToString:lastName]);
+        BOOL isFirstNameMatch = (firstName == nil && contactFirstName == nil) || ([contactFirstName caseInsensitiveCompare:firstName] == NSOrderedSame);
+        BOOL isLastNameMatch = (lastName == nil && contactLastName == nil) || ([contactLastName caseInsensitiveCompare:lastName] == NSOrderedSame);
         BOOL isMatch = isFirstNameMatch && isLastNameMatch;
         if (isMatch) {
             contactToBeDeleted = (__bridge ABRecordRef)obj;
@@ -121,21 +119,33 @@ void addressBookExternalChangeCallback() {
         return isMatch;
     };
 
-    if ([peopleArray indexOfObjectPassingTest:predicate] != NSNotFound) {
-        BOOL didRemove = ABAddressBookRemoveRecord(addressBook, contactToBeDeleted, &error);
-        if (!didRemove) {
-            return NO;
+    NSIndexSet *matchingContacts = [peopleArray indexesOfObjectsPassingTest:predicate];
+    if (matchingContacts.count != 1) {
+        if (matchingContacts.count == 0) {
+            NSLog(@"Contact deletion failed: no matching contact found");
         }
 
-        BOOL didSave = ABAddressBookSave(addressBook, &error);
-        if (!didSave) {
-            return NO;
+        if (matchingContacts.count > 1) {
+            NSLog(@"Contact deletion failed: conflict due to multiple matches");
         }
 
-        return YES;
+        return NO;
     }
 
-    return NO;
+    CFErrorRef error = nil;
+    BOOL didRemove = ABAddressBookRemoveRecord(addressBook, contactToBeDeleted, &error);
+    if (!didRemove) {
+        NSLog(@"Failed to remove address book record, %@", error);
+        return NO;
+    }
+
+    BOOL didSave = ABAddressBookSave(addressBook, &error);
+    if (!didSave) {
+        NSLog(@"Failed to save address book, %@", error);
+        return NO;
+    }
+
+    return YES;
 }
 
 #pragma mark - Private
