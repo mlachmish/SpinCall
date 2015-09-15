@@ -111,12 +111,12 @@ static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
 - (void)loadRandomContact {
     self.currentDisplayedContact = [self getRandomContact];
 
-    self.backgroundImageView.image = self.currentDisplayedContact.avatar;
-    self.backgroundImageView.frame = CGRectMake(self.view.center.x,0,0,0);
-    [self.backgroundImageView sizeToFit];
+    self.backgroundImageView.image = self.currentDisplayedContact.originalSizeAvatar;
+    self.backgroundImageView.contentMode = UIViewContentModeScaleToFill;
+    self.backgroundImageView.frame = self.view.frame;
 
     self.contactView.name = self.currentDisplayedContact.displayName;
-    self.contactView.avatar = self.currentDisplayedContact.avatar;
+    self.contactView.avatar = self.currentDisplayedContact.thumbnailAvatar;
     self.contactView.primaryPhoneLabel = self.currentDisplayedContact.phoneNumbers.firstObject[SPCAddressBookFacadePhoneNumbersListDictionaryKeys.phoneLabel];
     self.contactView.primaryPhoneNumber = self.currentDisplayedContact.phoneNumbers.firstObject[SPCAddressBookFacadePhoneNumbersListDictionaryKeys.phoneNumber];
 
