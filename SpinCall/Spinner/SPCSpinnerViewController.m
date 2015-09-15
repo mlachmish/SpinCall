@@ -153,8 +153,11 @@ static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
     UIAlertAction *yesAction = [UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
         @strongify(self);
         DDLogDebug(@"Deleting contact: %@ %@", self.currentDisplayedContact.firstName, self.currentDisplayedContact.lastName);
-        [SPCAddressBookFacade deleteContactWithFirstName:self.currentDisplayedContact.firstName lastName:self.currentDisplayedContact.lastName];
-        [self loadRandomContact];
+        BOOL didDeleted = [SPCAddressBookFacade deleteContactWithFirstName:self.currentDisplayedContact.firstName lastName:self.currentDisplayedContact.lastName];
+
+        if (didDeleted) {
+            [self loadRandomContact];
+        }
     }];
     [alertController addAction:yesAction];
 
