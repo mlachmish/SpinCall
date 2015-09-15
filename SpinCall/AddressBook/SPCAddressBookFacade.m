@@ -73,20 +73,6 @@ const struct SPCAddressBookFacadePhoneNumbersListDictionaryKeys SPCAddressBookFa
     return contactRefs;
 }
 
-+ (NSArray *)emailsForRecord:(id)record {
-    if ([record isKindOfClass:[SPCAddressBookFacadeContact class]]) {
-        return ((SPCAddressBookFacadeContact *)record).emailAddresses;
-    }
-    return @[];
-}
-
-+ (NSString *)displayNameForRecord:(id)record {
-    if ([record isKindOfClass:[SPCAddressBookFacadeContact class]]) {
-        return ((SPCAddressBookFacadeContact *)record).displayName;
-    }
-    return @"";
-}
-
 #pragma mark - Private
 
 + (NSArray *)arrayFromABMutableMultiValueRef:(ABMutableMultiValueRef)mutableMultiValueRef {

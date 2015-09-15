@@ -41,23 +41,4 @@ extern const struct SPCAddressBookFacadePhoneNumbersListDictionaryKeys {
  */
 + (NSArray *)contactList;
 
-/**
- *  Retrieve email addresses for an address book record.
- *
- *  @param address book record.
- *
- *  @return an array of emails.
- */
-+ (NSArray *)emailsForRecord:(id)record;
-
-/**
- *  Generate display name for Address book contact.
- *  The display name is the concatenation of the first and last name.
- *
- *  @param address book record.
- *
- *  @return a display name string.
- */
-+ (NSString *)displayNameForRecord:(id)record;
-
 @end
