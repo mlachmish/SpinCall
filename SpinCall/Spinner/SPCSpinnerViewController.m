@@ -139,7 +139,8 @@ static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
 }
 
 - (NSString *)getTextMessgae {
-    return @"Hey%2C%20what's%20up?";
+    NSString *message = @"מה המצב אחי?";
+    return [message stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 }
 
 #pragma mark - SPCContactViewDelegate
