@@ -14,8 +14,6 @@
 #import "EXTScope.h"
 #import "SPCWhatsAppFacade.h"
 
-static NSString *const kSPCSpinnerViewControllerWhatsappScheme = @"whatsapp://";
-
 //TODO: refactor logging
 static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
 
