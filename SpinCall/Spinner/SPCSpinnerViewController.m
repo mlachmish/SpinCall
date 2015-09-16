@@ -137,7 +137,8 @@ static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
 }
 
 - (NSString *)getTextMessgae {
-    NSString *message = @"מה המצב אחי?";
+    NSArray *messages = @[@"מה המצב אחי?", @"מה קורה?", @"יו :)"];
+    NSString *message = messages[arc4random_uniform(messages.count)];
     return [message stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 }
 
