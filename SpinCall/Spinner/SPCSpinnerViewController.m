@@ -12,6 +12,7 @@
 #import "SPCContactView.h"
 #import "SPCAddressBookFacadeContact.h"
 #import "EXTScope.h"
+#import "SPCWhatsAppFacade.h"
 
 static NSString *const kSPCSpinnerViewControllerWhatsappScheme = @"whatsapp://";
 
@@ -56,7 +57,7 @@ static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
 
     _contactView = [[SPCContactView alloc] initWithFrame:self.view.frame];
     _contactView.delegate = self;
-    _contactView.isWhatsappAvailable = [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:kSPCSpinnerViewControllerWhatsappScheme]];
+    _contactView.isWhatsappAvailable = [[SPCWhatsAppFacade sharedInstance] isWhatsAppAvailable];
     [self.view addSubview:_contactView];
 
     self.addressBookAuthorizationStatus = [SPCAddressBookFacade addressBookAuthorizationStatus];
@@ -137,7 +138,7 @@ static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
     _isContactListInvalid = YES;
 }
 
-- (NSObject *)getTextMessgae {
+- (NSString *)getTextMessgae {
     return @"Hey%2C%20what's%20up?";
 }
 
@@ -176,11 +177,7 @@ static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
 
 - (void)didTapWhatsappButton {
     DDLogDebug(@"Whatsapp to %@", self.currentDisplayedContact.displayName);
-    NSString *urlString = [NSString stringWithFormat:@"whatsapp://send?text=%@&abid=%@", [self getTextMessgae], self.currentDisplayedContact.recordID];
-    NSURL *whatsappURL = [NSURL URLWithString:urlString];
-    if ([[UIApplication sharedApplication] canOpenURL: whatsappURL]) {
-        [[UIApplication sharedApplication] openURL: whatsappURL];
-    }
+    [[SPCWhatsAppFacade sharedInstance] sendTextMessage:[self getTextMessgae] toUserID:self.currentDisplayedContact.recordID];
 }
 
 @end
