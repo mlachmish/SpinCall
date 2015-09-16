@@ -15,6 +15,7 @@
  */
 @interface SPCAddressBookFacadeContact : NSObject
 
+@property (nonatomic, strong) NSNumber *recordID;
 @property (nonatomic, strong) NSString *firstName;
 @property (nonatomic, strong) NSString *lastName;
 @property (nonatomic, strong, readonly) NSString *displayName;
@@ -23,5 +24,5 @@
 @property (nonatomic, strong) NSArray *phoneNumbers;
 @property (nonatomic, strong) NSArray *emailAddresses;
 
-- (instancetype)initWithFirstName:(NSString *)firstName lastName:(NSString *)lastName thumbnailAvatar:(UIImage *)thumbnailAvatar originalSizeAvatar:(UIImage *)originalSizeAvatar phoneNumber:(NSArray *)phoneNumbers emailAddresses:(NSArray *)emailAddresses;
+- (instancetype)initWithRecordID:(NSNumber *)recordID firstName:(NSString *)firstName lastName:(NSString *)lastName thumbnailAvatar:(UIImage *)thumbnailAvatar originalSizeAvatar:(UIImage *)originalSizeAvatar phoneNumber:(NSArray *)phoneNumbers emailAddresses:(NSArray *)emailAddresses;
 @end

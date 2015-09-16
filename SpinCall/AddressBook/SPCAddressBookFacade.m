@@ -86,7 +86,7 @@ void addressBookExternalChangeCallback() {
         if (contactsFromSource) {
             NSMutableArray *resultContacts = [[NSMutableArray alloc] init];
             for (id value in contactsFromSource) {
-                [resultContacts addObject:[[SPCAddressBookFacadeContact alloc] initWithFirstName:[SPCAddressBookFacade firstNameForABRecordRef:value] lastName:[SPCAddressBookFacade lastNameForABRecordRef:value] thumbnailAvatar:[SPCAddressBookFacade thumbnailAvatarForABRecordRef:value] originalSizeAvatar:[SPCAddressBookFacade originalSizeAvatarForABRecordRef:value] phoneNumber:[SPCAddressBookFacade phoneNumbersForABRecordRef:value] emailAddresses:[SPCAddressBookFacade emailsForABRecordRef:value]]];
+                [resultContacts addObject:[[SPCAddressBookFacadeContact alloc] initWithRecordID:[SPCAddressBookFacade recordIDForABRecordRef:value] firstName:[SPCAddressBookFacade firstNameForABRecordRef:value] lastName:[SPCAddressBookFacade lastNameForABRecordRef:value] thumbnailAvatar:[SPCAddressBookFacade thumbnailAvatarForABRecordRef:value] originalSizeAvatar:[SPCAddressBookFacade originalSizeAvatarForABRecordRef:value] phoneNumber:[SPCAddressBookFacade phoneNumbersForABRecordRef:value] emailAddresses:[SPCAddressBookFacade emailsForABRecordRef:value]]];
             }
             [contactRefs addObjectsFromArray:resultContacts];
         }
@@ -158,6 +158,11 @@ void addressBookExternalChangeCallback() {
         [array addObject:value];
     }
     return array;
+}
+
++ (NSNumber *)recordIDForABRecordRef:(id)record {
+    ABRecordRef thisContact = (__bridge ABRecordRef) record;
+    return @(ABRecordGetRecordID(thisContact));
 }
 
 + (NSString *)firstNameForABRecordRef:(id)record {
