@@ -162,10 +162,10 @@
 }
 
 - (void)longTappedOutSide{
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Delete Contact!" message:@"Are you sure you want to delete this contact from your Address Book?" preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Delete Contact!", nil) message:NSLocalizedString(@"Are you sure you want to delete this contact from your Address Book?", nil) preferredStyle:UIAlertControllerStyleAlert];
 
     @weakify(self);
-    UIAlertAction *yesAction = [UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
+    UIAlertAction *yesAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Yes", nil) style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
         @strongify(self);
         SPCLogDebug(@"Deleting contact: %@ %@", self.currentDisplayedContact.firstName, self.currentDisplayedContact.lastName);
         BOOL didDeleted = [SPCAddressBookFacade deleteContactWithFirstName:self.currentDisplayedContact.firstName lastName:self.currentDisplayedContact.lastName];
@@ -176,14 +176,14 @@
     }];
     [alertController addAction:yesAction];
 
-    UIAlertAction*nolAction = [UIAlertAction actionWithTitle:@"No" style:UIAlertActionStyleCancel handler:nil];
+    UIAlertAction*nolAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"No", nil) style:UIAlertActionStyleCancel handler:nil];
     [alertController addAction:nolAction];
 
     [self presentViewController:alertController animated:YES completion:nil];
 }
 
 - (void)didTapWhatsappButton {
-    SPCLogDebug(@"Whatsapp to %@", self.currentDisplayedContact.displayName);
+    SPCLogDebug(@"WhatsApp to %@", self.currentDisplayedContact.displayName);
     [[SPCWhatsAppFacade sharedInstance] sendTextMessage:[self getTextMessgae] toUserID:self.currentDisplayedContact.recordID];
 }
 

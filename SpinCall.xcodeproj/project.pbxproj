@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		62DD9375EC6EB9ADBE8DD1EC /* SPCSpinnerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 62DD97DE2EA51E008DB1227A /* SPCSpinnerViewController.m */; };
 		62DD940DFFD64BC9DEDC7CD0 /* SPCAddressBookFacadeContact.m in Sources */ = {isa = PBXBuildFile; fileRef = 62DD91D670280EC93E3892DA /* SPCAddressBookFacadeContact.m */; };
+		62DD95300D3AC4A3BD914122 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 62DD99ED1579CB0CF14F555E /* Localizable.strings */; };
 		62DD9616926F80331DC1F67C /* SPCLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 62DD99B4E431D4A9148F643E /* SPCLog.m */; };
 		62DD96661DB44707A2F4355B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 62DD97C5866CFB6B162D77DF /* Images.xcassets */; };
 		62DD97B949A84E109B6F6E94 /* UIView+Shortcuts.m in Sources */ = {isa = PBXBuildFile; fileRef = 62DD9A76A78D49E60AA309FD /* UIView+Shortcuts.m */; };
@@ -46,6 +47,7 @@
 		62DD9886C63836C5AAB3AAAE /* SPCAvatarImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPCAvatarImageView.h; sourceTree = "<group>"; };
 		62DD992B0A35142ECBC2F1B1 /* SPCAddressBookFacade.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPCAddressBookFacade.h; sourceTree = "<group>"; };
 		62DD99B4E431D4A9148F643E /* SPCLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPCLog.m; sourceTree = "<group>"; };
+		62DD99ED1579CB0CF14F555E /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = Localizable.strings; path = Spinner/Localizable.strings; sourceTree = "<group>"; };
 		62DD9A0C0D92BC5626099685 /* SPCContactView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPCContactView.m; sourceTree = "<group>"; };
 		62DD9A76A78D49E60AA309FD /* UIView+Shortcuts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Shortcuts.m"; sourceTree = "<group>"; };
 		62DD9D86EC3B436ECB651808 /* SPCSpinnerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPCSpinnerViewController.h; sourceTree = "<group>"; };
@@ -191,6 +193,7 @@
 				90FC839C1BA387040036B15D /* Info.plist */,
 				90FC839D1BA387040036B15D /* main.m */,
 				62DD97C5866CFB6B162D77DF /* Images.xcassets */,
+				62DD99ED1579CB0CF14F555E /* Localizable.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -303,6 +306,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				62DD96661DB44707A2F4355B /* Images.xcassets in Resources */,
+				62DD95300D3AC4A3BD914122 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
