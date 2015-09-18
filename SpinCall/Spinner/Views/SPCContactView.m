@@ -65,7 +65,7 @@ typedef NS_ENUM (NSInteger, SPCContactViewPhoneLabelTags) {
         [self addSubview:_secondaryPhoneNumberLabel];
 
         _whatsappButton = [[UIButton alloc] init];
-        [_whatsappButton setTitle:@"Whatsapp" forState:UIControlStateNormal];
+        [_whatsappButton setTitle:@"WhatsApp" forState:UIControlStateNormal];
         [_whatsappButton setTitleColor:[UIColor colorWithRed:0.33 green:0.81 blue:0.21 alpha:0.9] forState:UIControlStateNormal];
         [_whatsappButton setTitleColor:[UIColor grayColor] forState:UIControlStateDisabled];
         [_whatsappButton addTarget:self
