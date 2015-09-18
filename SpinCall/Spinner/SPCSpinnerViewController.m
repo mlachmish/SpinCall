@@ -7,15 +7,12 @@
 //
 
 #import "SPCSpinnerViewController.h"
-#import "CocoaLumberjack.h"
 #import "SPCAddressBookFacade.h"
 #import "SPCContactView.h"
 #import "SPCAddressBookFacadeContact.h"
 #import "EXTScope.h"
 #import "SPCWhatsAppFacade.h"
-
-//TODO: refactor logging
-static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
+#import "SPCLog.h"
 
 @interface SPCSpinnerViewController () <SPCContactViewDelegate>
 
@@ -73,7 +70,7 @@ static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
     if (!_contacts || _isContactListInvalid) {
         _isContactListInvalid = NO;
         _contacts = [SPCAddressBookFacade contactList];
-        DDLogDebug(@"Found %ld contact records", _contacts.count);
+        SPCLogDebug(@"Found %ld contact records", _contacts.count);
     }
     return _contacts;
 }
@@ -97,9 +94,9 @@ static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
 - (void)requestAddressBookPermissionIfNeeded {
     if ([SPCAddressBookFacade addressBookAuthorizationStatus] != SPCAddressBookFacadeStatusDenied
             && [SPCAddressBookFacade addressBookAuthorizationStatus] != SPCAddressBookFacadeStatusAuthorized) {
-        DDLogDebug(@"Requesting contacts access");
+        SPCLogDebug(@"Requesting contacts access");
         [SPCAddressBookFacade requestAuthorization:^(SPCAddressBookFacadeStatus status) {
-            DDLogDebug(@"Contacts access set to %d", status);
+            SPCLogDebug(@"Contacts access set to %d", status);
             self.addressBookAuthorizationStatus = [SPCAddressBookFacade addressBookAuthorizationStatus];
         }];
     }
@@ -132,7 +129,7 @@ static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
 }
 
 - (void)handleAddressBookChangedNotification:(NSNotification *)notification {
-    DDLogDebug(@"Recieved AddressBook changed notification");
+    SPCLogDebug(@"Recieved AddressBook changed notification");
     _isContactListInvalid = YES;
 }
 
@@ -145,7 +142,7 @@ static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
 #pragma mark - SPCContactViewDelegate
 
 - (void)phoneNumberLabelTapped:(NSString *)phoneNumber {
-    DDLogDebug(@"Calling %@", phoneNumber);
+    SPCLogDebug(@"Calling %@", phoneNumber);
     NSString *urlString = [@"tel:" stringByAppendingString:phoneNumber];
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]];
 }
@@ -160,7 +157,7 @@ static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
     @weakify(self);
     UIAlertAction *yesAction = [UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDestructive handler:^(UIAlertAction *action) {
         @strongify(self);
-        DDLogDebug(@"Deleting contact: %@ %@", self.currentDisplayedContact.firstName, self.currentDisplayedContact.lastName);
+        SPCLogDebug(@"Deleting contact: %@ %@", self.currentDisplayedContact.firstName, self.currentDisplayedContact.lastName);
         BOOL didDeleted = [SPCAddressBookFacade deleteContactWithFirstName:self.currentDisplayedContact.firstName lastName:self.currentDisplayedContact.lastName];
 
         if (didDeleted) {
@@ -176,7 +173,7 @@ static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
 }
 
 - (void)didTapWhatsappButton {
-    DDLogDebug(@"Whatsapp to %@", self.currentDisplayedContact.displayName);
+    SPCLogDebug(@"Whatsapp to %@", self.currentDisplayedContact.displayName);
     [[SPCWhatsAppFacade sharedInstance] sendTextMessage:[self getTextMessgae] toUserID:self.currentDisplayedContact.recordID];
 }
 

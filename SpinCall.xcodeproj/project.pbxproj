@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		62DD9375EC6EB9ADBE8DD1EC /* SPCSpinnerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 62DD97DE2EA51E008DB1227A /* SPCSpinnerViewController.m */; };
 		62DD940DFFD64BC9DEDC7CD0 /* SPCAddressBookFacadeContact.m in Sources */ = {isa = PBXBuildFile; fileRef = 62DD91D670280EC93E3892DA /* SPCAddressBookFacadeContact.m */; };
+		62DD9616926F80331DC1F67C /* SPCLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 62DD99B4E431D4A9148F643E /* SPCLog.m */; };
 		62DD96661DB44707A2F4355B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 62DD97C5866CFB6B162D77DF /* Images.xcassets */; };
 		62DD97B949A84E109B6F6E94 /* UIView+Shortcuts.m in Sources */ = {isa = PBXBuildFile; fileRef = 62DD9A76A78D49E60AA309FD /* UIView+Shortcuts.m */; };
 		62DD99CEDBCE558E03D569E6 /* SPCAddressBookFacade.m in Sources */ = {isa = PBXBuildFile; fileRef = 62DD9427BF09126E5C8AF007 /* SPCAddressBookFacade.m */; };
@@ -44,9 +45,11 @@
 		62DD97DE2EA51E008DB1227A /* SPCSpinnerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPCSpinnerViewController.m; sourceTree = "<group>"; };
 		62DD9886C63836C5AAB3AAAE /* SPCAvatarImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPCAvatarImageView.h; sourceTree = "<group>"; };
 		62DD992B0A35142ECBC2F1B1 /* SPCAddressBookFacade.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPCAddressBookFacade.h; sourceTree = "<group>"; };
+		62DD99B4E431D4A9148F643E /* SPCLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPCLog.m; sourceTree = "<group>"; };
 		62DD9A0C0D92BC5626099685 /* SPCContactView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPCContactView.m; sourceTree = "<group>"; };
 		62DD9A76A78D49E60AA309FD /* UIView+Shortcuts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Shortcuts.m"; sourceTree = "<group>"; };
 		62DD9D86EC3B436ECB651808 /* SPCSpinnerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPCSpinnerViewController.h; sourceTree = "<group>"; };
+		62DD9E9192EB0A83149C759E /* SPCLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPCLog.h; sourceTree = "<group>"; };
 		62DD9FA9CF75C00E54A78684 /* SPCContactView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPCContactView.h; sourceTree = "<group>"; };
 		90FC83981BA387040036B15D /* SpinCall.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpinCall.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		90FC839C1BA387040036B15D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -138,6 +141,15 @@
 			path = WhatsApp;
 			sourceTree = "<group>";
 		};
+		62DD9AAEB25B63271238432F /* Logger */ = {
+			isa = PBXGroup;
+			children = (
+				62DD99B4E431D4A9148F643E /* SPCLog.m */,
+				62DD9E9192EB0A83149C759E /* SPCLog.h */,
+			);
+			path = Logger;
+			sourceTree = "<group>";
+		};
 		90FC838F1BA387040036B15D = {
 			isa = PBXGroup;
 			children = (
@@ -168,6 +180,7 @@
 				62DD9071A27ED46379AA4EF5 /* Spinner */,
 				62DD94460CC181D99FB88C0C /* Categories */,
 				62DD97545571056DC975AA32 /* WhatsApp */,
+				62DD9AAEB25B63271238432F /* Logger */,
 			);
 			path = SpinCall;
 			sourceTree = "<group>";
@@ -349,6 +362,7 @@
 				62DD9F77828FA22BD90108FD /* SPCContactView.m in Sources */,
 				62DD9C9DADCEEFB6A30AB496 /* SPCAvatarImageView.m in Sources */,
 				62DD9E8B893F88B1710CA14E /* SPCWhatsAppFacade.m in Sources */,
+				62DD9616926F80331DC1F67C /* SPCLog.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

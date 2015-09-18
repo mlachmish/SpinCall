@@ -9,11 +9,8 @@
 #import "SPCAppDelegate.h"
 #import "DDTTYLogger.h"
 #import "DDASLLogger.h"
-#import "CocoaLumberjack.h"
 #import "SPCSpinnerViewController.h"
-
-//TODO: refactor logging
-static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
+#import "SPCLog.h"
 
 @interface SPCAppDelegate ()
 
@@ -23,15 +20,9 @@ static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    [DDLog addLogger:[DDASLLogger sharedInstance]];
-    [DDLog addLogger:[DDTTYLogger sharedInstance]];
-    DDLogVerbose(@"App launched!");
-
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    self.window.backgroundColor = [UIColor whiteColor];
-    UIViewController *spinnerViewController = [[SPCSpinnerViewController alloc] init];
-    self.window.rootViewController = spinnerViewController;
-    [self.window makeKeyAndVisible];
+    [self configureApplication:application];
+    SPCLogVerbose(@"App created succesfully");
+    [self showApplication];
 
     return YES;
 }
@@ -56,6 +47,28 @@ static const DDLogLevel ddLogLevel = DDLogLevelVerbose;
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+#pragma mark - Private
+
+- (void)configureApplication:(UIApplication *)application {
+    [self configureLoggingForApplication:application];
+    SPCLogVerbose(@"Configuration completed");
+}
+
+- (void)configureLoggingForApplication:(UIApplication *)application {
+    [DDLog addLogger:[DDASLLogger sharedInstance]];
+    [DDLog addLogger:[DDTTYLogger sharedInstance]];
+    SPCLogLevel = DDLogLevelVerbose;
+}
+
+- (void)showApplication {
+    SPCLogVerbose(@"Showing Application");
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    self.window.backgroundColor = [UIColor whiteColor];
+    UIViewController *spinnerViewController = [[SPCSpinnerViewController alloc] init];
+    self.window.rootViewController = spinnerViewController;
+    [self.window makeKeyAndVisible];
 }
 
 @end
