@@ -143,10 +143,11 @@
     _isContactListInvalid = YES;
 }
 
-- (NSString *)getTextMessgae {
-    NSArray *messages = @[@"מה המצב אחי?", @"מה קורה?", @"יו :)"];
-    NSString *message = messages[arc4random_uniform(messages.count)];
-    return [message stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+- (NSString *)getHelloTextMessage {
+    NSDictionary *messagesDictionary = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Messages" ofType:@"plist"]];
+    NSArray *helloMessagesArray = messagesDictionary[@"HelloMessagesArray"];
+    NSString *helloMessage = helloMessagesArray[arc4random_uniform(helloMessagesArray.count)];
+    return [helloMessage stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 }
 
 #pragma mark - SPCContactViewDelegate
@@ -184,7 +185,7 @@
 
 - (void)didTapWhatsappButton {
     SPCLogDebug(@"WhatsApp to %@", self.currentDisplayedContact.displayName);
-    [[SPCWhatsAppFacade sharedInstance] sendTextMessage:[self getTextMessgae] toUserID:self.currentDisplayedContact.recordID];
+    [[SPCWhatsAppFacade sharedInstance] sendTextMessage:[self getHelloTextMessage] toUserID:self.currentDisplayedContact.recordID];
 }
 
 @end

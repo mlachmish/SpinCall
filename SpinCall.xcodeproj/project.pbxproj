@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		62DD9375EC6EB9ADBE8DD1EC /* SPCSpinnerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 62DD97DE2EA51E008DB1227A /* SPCSpinnerViewController.m */; };
+		62DD9379723A3F7BC41746FD /* Messages.plist in Resources */ = {isa = PBXBuildFile; fileRef = 62DD95A5849B5C9C88D0BDD4 /* Messages.plist */; };
 		62DD940DFFD64BC9DEDC7CD0 /* SPCAddressBookFacadeContact.m in Sources */ = {isa = PBXBuildFile; fileRef = 62DD91D670280EC93E3892DA /* SPCAddressBookFacadeContact.m */; };
 		62DD95300D3AC4A3BD914122 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 62DD99ED1579CB0CF14F555E /* Localizable.strings */; };
 		62DD9616926F80331DC1F67C /* SPCLog.m in Sources */ = {isa = PBXBuildFile; fileRef = 62DD99B4E431D4A9148F643E /* SPCLog.m */; };
@@ -42,6 +43,7 @@
 		62DD93ABD2EDDB5AB142A1AE /* UIView+Shortcuts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Shortcuts.h"; sourceTree = "<group>"; };
 		62DD9427BF09126E5C8AF007 /* SPCAddressBookFacade.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPCAddressBookFacade.m; sourceTree = "<group>"; };
 		62DD94333B0DFFE67754CC8E /* SPCAddressBookFacadeContact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPCAddressBookFacadeContact.h; sourceTree = "<group>"; };
+		62DD95A5849B5C9C88D0BDD4 /* Messages.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Messages.plist; sourceTree = "<group>"; };
 		62DD97C5866CFB6B162D77DF /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		62DD97DE2EA51E008DB1227A /* SPCSpinnerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPCSpinnerViewController.m; sourceTree = "<group>"; };
 		62DD9886C63836C5AAB3AAAE /* SPCAvatarImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPCAvatarImageView.h; sourceTree = "<group>"; };
@@ -139,6 +141,7 @@
 			children = (
 				62DD90190230CB808BC6A88D /* SPCWhatsAppFacade.m */,
 				62DD91A3336C7AE27E027FD6 /* SPCWhatsAppFacade.h */,
+				62DD95A5849B5C9C88D0BDD4 /* Messages.plist */,
 			);
 			path = WhatsApp;
 			sourceTree = "<group>";
@@ -307,6 +310,7 @@
 			files = (
 				62DD96661DB44707A2F4355B /* Images.xcassets in Resources */,
 				62DD95300D3AC4A3BD914122 /* Localizable.strings in Resources */,
+				62DD9379723A3F7BC41746FD /* Messages.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
