@@ -80,7 +80,7 @@
     if (!_contacts || _isContactListInvalid) {
         _isContactListInvalid = NO;
         _contacts = [SPCAddressBookFacade contactList];
-        SPCLogDebug(@"Found %ld contact records", _contacts.count);
+        SPCLogDebug(@"Found %ld contact records", (unsigned long)_contacts.count);
     }
     return _contacts;
 }
@@ -106,7 +106,7 @@
             && [SPCAddressBookFacade addressBookAuthorizationStatus] != SPCAddressBookFacadeStatusAuthorized) {
         SPCLogDebug(@"Requesting contacts access");
         [SPCAddressBookFacade requestAuthorization:^(SPCAddressBookFacadeStatus status) {
-            SPCLogDebug(@"Contacts access set to %d", status);
+            SPCLogDebug(@"Contacts access set to %ld", (long)status);
             self.addressBookAuthorizationStatus = [SPCAddressBookFacade addressBookAuthorizationStatus];
         }];
     }
