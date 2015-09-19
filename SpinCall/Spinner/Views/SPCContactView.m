@@ -112,7 +112,7 @@ typedef NS_ENUM (NSInteger, SPCContactViewPhoneLabelTags) {
     self.nameLabel.text = name;
 
     if (!self.avatar) {
-        [self.avatarView setAvatarName:self.name];
+        [self setAvatarInitials:name];
     }
 
     [self layoutSubviews];
@@ -151,15 +151,33 @@ typedef NS_ENUM (NSInteger, SPCContactViewPhoneLabelTags) {
     _avatar = avatar;
 
     if (avatar) {
-        self.avatarView.image = avatar;
+        [self setAvatarImage:avatar];
     } else {
-        [self.avatarView setAvatarName:self.name];
+        [self setAvatarInitials:self.name];
     }
 
     [self layoutSubviews];
 }
 
 #pragma mark - Private
+
+- (void)setAvatarImage:(UIImage *)avatar {
+    [UIView transitionWithView:self.avatarView
+                      duration:0.2f
+                       options:UIViewAnimationOptionTransitionCrossDissolve
+                    animations:^{
+                        self.avatarView.image = avatar;
+                    } completion:NULL];
+}
+
+- (void)setAvatarInitials:(NSString *)name {
+    [UIView transitionWithView:self.avatarView
+                      duration:0.2f
+                       options:UIViewAnimationOptionTransitionCrossDissolve
+                    animations:^{
+                        [self.avatarView setAvatarName:name];
+                    } completion:NULL];
+}
 
 - (void)handleTapOutSide:(UITapGestureRecognizer *)recognizer {
     [self.delegate tappedOutSide];
