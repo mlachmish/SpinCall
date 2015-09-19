@@ -21,6 +21,7 @@
 @property (assign, nonatomic) SPCAddressBookFacadeStatus addressBookAuthorizationStatus;
 
 @property (strong, nonatomic) UIImageView *backgroundImageView;
+@property (strong, nonatomic) UIVisualEffectView *blurEffectView;
 @property (strong, nonatomic) SPCContactView *contactView;
 
 @end
@@ -43,11 +44,11 @@
         self.view.backgroundColor = [UIColor clearColor];
 
         UIBlurEffect *blurEffect = [UIBlurEffect effectWithStyle:UIBlurEffectStyleExtraLight];
-        UIVisualEffectView *blurEffectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
-        blurEffectView.frame = self.view.bounds;
-        blurEffectView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        _blurEffectView = [[UIVisualEffectView alloc] initWithEffect:blurEffect];
+        _blurEffectView.frame = self.view.bounds;
+        _blurEffectView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 
-        [self.view addSubview:blurEffectView];
+        [self.view addSubview:_blurEffectView];
     }
 
     _contactView = [[SPCContactView alloc] initWithFrame:self.view.frame];
