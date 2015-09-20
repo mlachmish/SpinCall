@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+@class UIViewController, SPCAddressBookFacadeContact;
+
 typedef NS_ENUM (NSInteger, SPCAddressBookFacadeStatus) {
     SPCAddressBookFacadeStatusNotDetermined = 0, // User has not yet made a choice with regards to this application
     SPCAddressBookFacadeStatusRestricted,        // This application is not authorized to access address book.
@@ -42,6 +44,31 @@ extern NSString * const SPCAddressBookFacadeAddressBookChangedNotification;
  *  @return an array populated with all your contacts.
  */
 + (NSArray *)contactList;
+
+/**
+ *  Retrieve a contact matching the contact id.
+ *  In case of a conflict or no match a nil will be returned.
+ *  CFRelease should be called on result.
+ *
+ *  @return matching SPCAddressBookFacadeContact or nil.
+ */
++ (SPCAddressBookFacadeContact *)findAddressBookFacadeContactWithRecordID:(NSNumber *)recordID;
+
+/**
+ *  Retrieve a contact matching the first and last name.
+ *  In case of a conflict or no match a nil will be returned.
+ *  CFRelease should be called on result.
+ *
+ *  @return matching SPCAddressBookFacadeContact or nil.
+ */
++ (SPCAddressBookFacadeContact *)findAddressBookFacadeContactWithFirstName:(NSString *)firstName lastName:(NSString *)lastName;
+
+/**
+ *  In case a matching contact was found, will return OS edit view controller.
+ *
+ *  @return UIViewController to edit the matching contact.
+ */
++ (UIViewController *)personViewController:(NSString *)firstName lastName:(NSString *)lastName;
 
 /**
  *  Delete the first contact matching the parameters

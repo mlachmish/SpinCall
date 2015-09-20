@@ -176,7 +176,11 @@ typedef NS_ENUM (NSInteger, SPCSpinnerViewControllerContactActions) {
 }
 
 - (void)loadRandomContact {
-    self.currentDisplayedContact = [self getRandomContact];
+    [self loadContact:[self getRandomContact]];
+}
+
+- (void)loadContact:(SPCAddressBookFacadeContact *)contact {
+    self.currentDisplayedContact = contact;
 
     self.backgroundImageView.image = self.currentDisplayedContact.originalSizeAvatar;
     self.backgroundImageView.contentMode = UIViewContentModeScaleToFill;
@@ -196,9 +200,18 @@ typedef NS_ENUM (NSInteger, SPCSpinnerViewControllerContactActions) {
     }
 }
 
+- (void)fetchAndUpdateCurrentDisplayedContact {
+    SPCLogDebug(@"fetching and updating: %@", self.currentDisplayedContact.displayName);
+    _isContactListInvalid = YES;
+    SPCAddressBookFacadeContact *currentDisplayedContactUpdated = [SPCAddressBookFacade findAddressBookFacadeContactWithRecordID:self.currentDisplayedContact.recordID];
+    if (currentDisplayedContactUpdated) {
+        [self loadContact:currentDisplayedContactUpdated];
+    }
+}
+
 - (void)handleAddressBookChangedNotification:(NSNotification *)notification {
     SPCLogDebug(@"Recieved AddressBook changed notification");
-    _isContactListInvalid = YES;
+    [self fetchAndUpdateCurrentDisplayedContact];
 }
 
 - (NSString *)getHelloTextMessage {
@@ -221,11 +234,23 @@ typedef NS_ENUM (NSInteger, SPCSpinnerViewControllerContactActions) {
 
 - (void)editContact {
     SPCLogDebug(@"Editing %@", self.currentDisplayedContact.displayName);
-    //TODO
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Comming Soon!" message:nil preferredStyle:UIAlertControllerStyleAlert];
-    UIAlertAction*nolAction = [UIAlertAction actionWithTitle:@"I can't wait" style:UIAlertActionStyleCancel handler:nil];
-    [alertController addAction:nolAction];
-    [self presentViewController:alertController animated:YES completion:nil];
+    UIViewController *editContactViewController = [SPCAddressBookFacade personViewController:self.currentDisplayedContact.firstName lastName:self.currentDisplayedContact.lastName];
+    if (editContactViewController) {
+        editContactViewController.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Back", nil) style:UIBarButtonItemStyleDone target:self action:@selector(returnFromEditContactView)];
+        UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:editContactViewController];
+
+        [self presentViewController:navigationController animated:YES completion:nil];
+    } else {
+        //TODO: show error to user
+    }
+}
+
+- (void)returnFromEditContactView {
+    //------Fix bug of not getting notify on address book change when editing a contact------
+    [self fetchAndUpdateCurrentDisplayedContact];
+    //------
+
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)deleteContact {
@@ -239,6 +264,8 @@ typedef NS_ENUM (NSInteger, SPCSpinnerViewControllerContactActions) {
 
         if (didDeleted) {
             [self loadRandomContact];
+        } else {
+            //TODO: show error to user
         }
     }];
     [alertController addAction:yesAction];

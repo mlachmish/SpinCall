@@ -10,6 +10,7 @@
 #import "SPCAddressBookFacadeContact.h"
 
 #import <AddressBook/AddressBook.h>
+#import <AddressBookUI/AddressBookUI.h>
 
 const struct SPCAddressBookFacadePhoneNumbersListDictionaryKeys SPCAddressBookFacadePhoneNumbersListDictionaryKeys = {
         .phoneLabel = @"phoneLabel",
@@ -98,11 +99,118 @@ void addressBookExternalChangeCallback() {
     return contactRefs;
 }
 
++ (SPCAddressBookFacadeContact *)findAddressBookFacadeContactWithRecordID:(NSNumber *)recordID {
+    ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(NULL, NULL);
+    NSArray *peopleArray = (__bridge NSArray *) ABAddressBookCopyArrayOfAllPeople(addressBook);
+    id contact = [SPCAddressBookFacade findContactWithRecordID:recordID inContactsArray:peopleArray];
+
+    if (!contact) {
+        if (addressBook) {CFRelease(addressBook); }
+        return nil;
+    }
+
+    return [[SPCAddressBookFacadeContact alloc] initWithRecordID:[SPCAddressBookFacade recordIDForABRecordRef:contact] firstName:[SPCAddressBookFacade firstNameForABRecordRef:contact] lastName:[SPCAddressBookFacade lastNameForABRecordRef:contact] thumbnailAvatar:[SPCAddressBookFacade thumbnailAvatarForABRecordRef:contact] originalSizeAvatar:[SPCAddressBookFacade originalSizeAvatarForABRecordRef:contact] phoneNumber:[SPCAddressBookFacade phoneNumbersForABRecordRef:contact] emailAddresses:[SPCAddressBookFacade emailsForABRecordRef:contact]];
+}
+
++ (SPCAddressBookFacadeContact *)findAddressBookFacadeContactWithFirstName:(NSString *)firstName lastName:(NSString *)lastName {
+    ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(NULL, NULL);
+    NSArray *peopleArray = (__bridge NSArray *) ABAddressBookCopyArrayOfAllPeople(addressBook);
+    id contact = [SPCAddressBookFacade findContactWithFirstName:firstName lastName:lastName inContactsArray:peopleArray];
+
+    if (!contact) {
+        if (addressBook) {CFRelease(addressBook); }
+        return nil;
+    }
+
+    return [[SPCAddressBookFacadeContact alloc] initWithRecordID:[SPCAddressBookFacade recordIDForABRecordRef:contact] firstName:[SPCAddressBookFacade firstNameForABRecordRef:contact] lastName:[SPCAddressBookFacade lastNameForABRecordRef:contact] thumbnailAvatar:[SPCAddressBookFacade thumbnailAvatarForABRecordRef:contact] originalSizeAvatar:[SPCAddressBookFacade originalSizeAvatarForABRecordRef:contact] phoneNumber:[SPCAddressBookFacade phoneNumbersForABRecordRef:contact] emailAddresses:[SPCAddressBookFacade emailsForABRecordRef:contact]];
+}
+
++ (UIViewController *)personViewController:(NSString *)firstName lastName:(NSString *)lastName  {
+    ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(NULL, NULL);
+    NSArray *peopleArray = (__bridge NSArray *) ABAddressBookCopyArrayOfAllPeople(addressBook);
+    ABRecordRef contactToBeEdited = [SPCAddressBookFacade findContactWithFirstName:firstName lastName:lastName inContactsArray:peopleArray];
+
+
+    if (!contactToBeEdited) {
+        if (addressBook) {CFRelease(addressBook); }
+        return nil;
+    }
+
+    ABRecordRef person = contactToBeEdited;
+    ABPersonViewController *picker = [[ABPersonViewController alloc] init];
+    picker.displayedPerson = person;
+    // Allow users to edit the person’s information
+    picker.allowsEditing = YES;
+    return picker;
+}
+
 + (BOOL)deleteContactWithFirstName:(NSString *)firstName lastName:(NSString *)lastName {
     ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(NULL, NULL);
     NSArray *peopleArray = (__bridge NSArray *) ABAddressBookCopyArrayOfAllPeople(addressBook);
+    ABRecordRef contactToBeDeleted = [SPCAddressBookFacade findContactWithFirstName:firstName lastName:lastName inContactsArray:peopleArray];
 
-    __block ABRecordRef contactToBeDeleted = ABPersonCreate();
+    if (!contactToBeDeleted) {
+        if (addressBook) {CFRelease(addressBook); }
+        return NO;
+    }
+
+    CFErrorRef error = nil;
+    BOOL didRemove = ABAddressBookRemoveRecord(addressBook, contactToBeDeleted, &error);
+    if (!didRemove) {
+        NSLog(@"Failed to remove address book record, %@", error);
+        if (contactToBeDeleted) {CFRelease(contactToBeDeleted); }
+        if (addressBook) {CFRelease(addressBook); }
+        return NO;
+    }
+
+    BOOL didSave = ABAddressBookSave(addressBook, &error);
+    if (!didSave) {
+        NSLog(@"Failed to save address book, %@", error);
+        if (contactToBeDeleted) {CFRelease(contactToBeDeleted); }
+        if (addressBook) {CFRelease(addressBook); }
+        return NO;
+    }
+
+    if (contactToBeDeleted) {CFRelease(contactToBeDeleted); }
+    if (addressBook) {CFRelease(addressBook); }
+    return YES;
+}
+
+#pragma mark - Private
+
++ (ABRecordRef)findContactWithRecordID:(NSNumber *)recordID inContactsArray:(NSArray *)contactsArray {
+    __block ABRecordRef contact = ABPersonCreate();
+
+    //Contact matching predicate
+    BOOL (^predicate)(id obj, NSUInteger idx, BOOL *stop) = ^(id obj, NSUInteger idx, BOOL *stop) {
+        NSNumber *contactRecordID = [SPCAddressBookFacade recordIDForABRecordRef:obj];
+
+        BOOL isRecordIDMatch = (recordID == nil && contactRecordID == nil) || ([recordID isEqualToNumber:contactRecordID]);
+        if (isRecordIDMatch) {
+            contact = (__bridge ABRecordRef)obj;
+        }
+
+        return isRecordIDMatch;
+    };
+
+    NSIndexSet *matchingContacts = [contactsArray indexesOfObjectsPassingTest:predicate];
+    if (matchingContacts.count != 1) {
+        if (matchingContacts.count == 0) {
+            NSLog(@"Contact lookup failed: no matching contact found");
+        }
+
+        if (matchingContacts.count > 1) {
+            NSLog(@"Contact lookup failed: conflict due to multiple matches");
+        }
+
+        return nil;
+    }
+
+    return contact;
+}
+
++ (ABRecordRef)findContactWithFirstName:(NSString *)firstName lastName:(NSString *)lastName inContactsArray:(NSArray *)contactsArray {
+    __block ABRecordRef contact = ABPersonCreate();
 
     //Contact matching predicate
     BOOL (^predicate)(id obj, NSUInteger idx, BOOL *stop) = ^(id obj, NSUInteger idx, BOOL *stop) {
@@ -113,42 +221,27 @@ void addressBookExternalChangeCallback() {
         BOOL isLastNameMatch = (lastName == nil && contactLastName == nil) || ([contactLastName localizedCaseInsensitiveCompare:lastName] == NSOrderedSame);
         BOOL isMatch = isFirstNameMatch && isLastNameMatch;
         if (isMatch) {
-            contactToBeDeleted = (__bridge ABRecordRef)obj;
+            contact = (__bridge ABRecordRef)obj;
         }
 
         return isMatch;
     };
 
-    NSIndexSet *matchingContacts = [peopleArray indexesOfObjectsPassingTest:predicate];
+    NSIndexSet *matchingContacts = [contactsArray indexesOfObjectsPassingTest:predicate];
     if (matchingContacts.count != 1) {
         if (matchingContacts.count == 0) {
-            NSLog(@"Contact deletion failed: no matching contact found");
+            NSLog(@"Contact lookup failed: no matching contact found");
         }
 
         if (matchingContacts.count > 1) {
-            NSLog(@"Contact deletion failed: conflict due to multiple matches");
+            NSLog(@"Contact lookup failed: conflict due to multiple matches");
         }
 
-        return NO;
+        return nil;
     }
 
-    CFErrorRef error = nil;
-    BOOL didRemove = ABAddressBookRemoveRecord(addressBook, contactToBeDeleted, &error);
-    if (!didRemove) {
-        NSLog(@"Failed to remove address book record, %@", error);
-        return NO;
-    }
-
-    BOOL didSave = ABAddressBookSave(addressBook, &error);
-    if (!didSave) {
-        NSLog(@"Failed to save address book, %@", error);
-        return NO;
-    }
-
-    return YES;
+    return contact;
 }
-
-#pragma mark - Private
 
 + (NSArray *)arrayFromABMutableMultiValueRef:(ABMutableMultiValueRef)mutableMultiValueRef {
     NSMutableArray *array = [NSMutableArray arrayWithCapacity:(NSUInteger) ABMultiValueGetCount(mutableMultiValueRef)];

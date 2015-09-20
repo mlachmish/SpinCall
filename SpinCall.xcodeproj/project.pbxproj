@@ -19,6 +19,10 @@
 		62DD9E8B893F88B1710CA14E /* SPCWhatsAppFacade.m in Sources */ = {isa = PBXBuildFile; fileRef = 62DD90190230CB808BC6A88D /* SPCWhatsAppFacade.m */; };
 		62DD9F77828FA22BD90108FD /* SPCContactView.m in Sources */ = {isa = PBXBuildFile; fileRef = 62DD9A0C0D92BC5626099685 /* SPCContactView.m */; };
 		734CD838061D912682822C3D /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BF7697983E04C6119A6BC6C7 /* libPods.a */; };
+		902AB0931BAF45A900D35795 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 902AB0921BAF45A900D35795 /* AddressBook.framework */; };
+		902AB0951BAF45AF00D35795 /* AddressBookUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 902AB0941BAF45AF00D35795 /* AddressBookUI.framework */; };
+		902AB0971BAF45BC00D35795 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 902AB0961BAF45BC00D35795 /* Foundation.framework */; };
+		902AB0991BAF45C100D35795 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 902AB0981BAF45C100D35795 /* UIKit.framework */; };
 		90FC839E1BA387040036B15D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 90FC839D1BA387040036B15D /* main.m */; };
 		90FC83A11BA387040036B15D /* SPCAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 90FC83A01BA387040036B15D /* SPCAppDelegate.m */; };
 		90FC83B81BA387040036B15D /* SpinCallTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 90FC83B71BA387040036B15D /* SpinCallTests.m */; };
@@ -55,6 +59,10 @@
 		62DD9D86EC3B436ECB651808 /* SPCSpinnerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPCSpinnerViewController.h; sourceTree = "<group>"; };
 		62DD9E9192EB0A83149C759E /* SPCLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPCLog.h; sourceTree = "<group>"; };
 		62DD9FA9CF75C00E54A78684 /* SPCContactView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPCContactView.h; sourceTree = "<group>"; };
+		902AB0921BAF45A900D35795 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
+		902AB0941BAF45AF00D35795 /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
+		902AB0961BAF45BC00D35795 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		902AB0981BAF45C100D35795 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		90FC83981BA387040036B15D /* SpinCall.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpinCall.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		90FC839C1BA387040036B15D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		90FC839D1BA387040036B15D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -72,6 +80,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				902AB0991BAF45C100D35795 /* UIKit.framework in Frameworks */,
+				902AB0971BAF45BC00D35795 /* Foundation.framework in Frameworks */,
+				902AB0951BAF45AF00D35795 /* AddressBookUI.framework in Frameworks */,
+				902AB0931BAF45A900D35795 /* AddressBook.framework in Frameworks */,
 				734CD838061D912682822C3D /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -221,6 +233,10 @@
 		FCC7F98ED1298F4BFD6A0286 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				902AB0981BAF45C100D35795 /* UIKit.framework */,
+				902AB0961BAF45BC00D35795 /* Foundation.framework */,
+				902AB0941BAF45AF00D35795 /* AddressBookUI.framework */,
+				902AB0921BAF45A900D35795 /* AddressBook.framework */,
 				BF7697983E04C6119A6BC6C7 /* libPods.a */,
 			);
 			name = Frameworks;
