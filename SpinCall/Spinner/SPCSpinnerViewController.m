@@ -222,6 +222,10 @@ typedef NS_ENUM (NSInteger, SPCSpinnerViewControllerContactActions) {
 - (void)editContact {
     SPCLogDebug(@"Editing %@", self.currentDisplayedContact.displayName);
     //TODO
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Comming Soon!" message:nil preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertAction*nolAction = [UIAlertAction actionWithTitle:@"I can't wait" style:UIAlertActionStyleCancel handler:nil];
+    [alertController addAction:nolAction];
+    [self presentViewController:alertController animated:YES completion:nil];
 }
 
 - (void)deleteContact {
