@@ -12,7 +12,6 @@
 - (void)tappedOutSide;
 - (void)longTappedOutSide;
 - (void)phoneNumberLabelTapped:(NSString *)phoneNumber;
-- (void)didTapWhatsappButton;
 
 @end
 
@@ -24,8 +23,6 @@
 @property (strong, nonatomic) NSString *primaryPhoneNumber;
 @property (strong, nonatomic) NSString *secondaryPhoneLabel;
 @property (strong, nonatomic) NSString *secondaryPhoneNumber;
-
-@property (assign, nonatomic) BOOL isWhatsappAvailable;
 
 @property (weak, nonatomic) id<SPCContactViewDelegate> delegate;
 

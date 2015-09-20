@@ -5,6 +5,7 @@ xcodeproj 'SpinCall'
 
 pod 'CocoaLumberjack', '~> 2.0.1'
 pod 'libextobjc', '~> 0.3'
+pod 'DCPathButton', '~> 2.1'
 
 #Debug dependencies
 pod 'Reveal-iOS-SDK', :configurations => ['Debug']

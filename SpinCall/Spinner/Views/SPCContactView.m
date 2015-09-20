@@ -27,7 +27,6 @@ typedef NS_ENUM (NSInteger, SPCContactViewPhoneLabelTags) {
 @property (strong, nonatomic) UILabel *secondaryPhoneLabelLabel;
 @property (strong, nonatomic) UILabel *secondaryPhoneNumberLabel;
 @property (strong, nonatomic) SPCAvatarImageView *avatarView;
-@property (strong, nonatomic) UIButton *whatsappButton;
 
 @end
 
@@ -64,15 +63,6 @@ typedef NS_ENUM (NSInteger, SPCContactViewPhoneLabelTags) {
         _secondaryPhoneNumberLabel.userInteractionEnabled = YES;
         [self addSubview:_secondaryPhoneNumberLabel];
 
-        _whatsappButton = [[UIButton alloc] init];
-        [_whatsappButton setTitle:@"WhatsApp" forState:UIControlStateNormal];
-        [_whatsappButton setTitleColor:[UIColor colorWithRed:0.33 green:0.81 blue:0.21 alpha:0.9] forState:UIControlStateNormal];
-        [_whatsappButton setTitleColor:[UIColor grayColor] forState:UIControlStateDisabled];
-        [_whatsappButton addTarget:self
-                   action:@selector(didTapWhatsappButton:)
-         forControlEvents:UIControlEventTouchUpInside];
-        [self addSubview:_whatsappButton];
-
         UITapGestureRecognizer *tappedOutSideGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapOutSide:)];
         [self addGestureRecognizer:tappedOutSideGesture];
 
@@ -100,9 +90,6 @@ typedef NS_ENUM (NSInteger, SPCContactViewPhoneLabelTags) {
 
     self.secondaryPhoneNumberLabel.frame = CGRectMake(self.secondaryPhoneLabelLabel.right + kPhonesMargin, self.secondaryPhoneLabelLabel.top, 0, 0);
     [self.secondaryPhoneNumberLabel sizeToFit];
-
-    self.whatsappButton.frame = CGRectMake(self.center.x - self.whatsappButton.width/2, self.secondaryPhoneLabelLabel.bottom + kPhonesMargin, 0, 0);
-    [self.whatsappButton sizeToFit];
 }
 
 #pragma mark - Custom Setters
@@ -140,11 +127,6 @@ typedef NS_ENUM (NSInteger, SPCContactViewPhoneLabelTags) {
     _secondaryPhoneNumber = secondaryPhoneNumber;
     self.secondaryPhoneNumberLabel.text = secondaryPhoneNumber;
     [self layoutSubviews];
-}
-
-- (void)setIsWhatsappAvailable:(BOOL)isWhatsappAvailable {
-    _isWhatsappAvailable = isWhatsappAvailable;
-    self.whatsappButton.enabled = isWhatsappAvailable;
 }
 
 - (void)setAvatar:(UIImage *)avatar {
@@ -193,10 +175,6 @@ typedef NS_ENUM (NSInteger, SPCContactViewPhoneLabelTags) {
     } else if (recognizer.view.tag == SPCContactViewPhoneLabelTagSecondary) {
         [self.delegate phoneNumberLabelTapped:self.secondaryPhoneNumberLabel.text];
     }
-}
-
-- (void)didTapWhatsappButton:(id)didTapWhatsappButton {
-    [self.delegate didTapWhatsappButton];
 }
 
 @end

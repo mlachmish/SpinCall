@@ -21,6 +21,7 @@ PODS:
     - CocoaLumberjack/Core
   - CocoaLumberjack/Extensions (2.0.1):
     - CocoaLumberjack/Default
+  - DCPathButton (2.1.2)
   - libextobjc (0.4.1):
     - libextobjc/EXTADT (= 0.4.1)
     - libextobjc/EXTConcreteProtocol (= 0.4.1)
@@ -61,6 +62,7 @@ PODS:
 DEPENDENCIES:
   - AFNetworkActivityLogger
   - CocoaLumberjack (~> 2.0.1)
+  - DCPathButton (~> 2.1)
   - libextobjc (~> 0.3)
   - Reveal-iOS-SDK
 
@@ -68,6 +70,7 @@ SPEC CHECKSUMS:
   AFNetworkActivityLogger: 121486778117d53b3ab1c61d264b88081d0c3eee
   AFNetworking: 79f7eb1a0fcfa7beb409332b2ca49afe9ce53b05
   CocoaLumberjack: 019d1361244274a6138c788c6cb80baabc13fb8f
+  DCPathButton: 7658fe6baed309cfdc09b3fe0231c590995a66e5
   libextobjc: a650fc1bf489a3d3a9bc2e621efa3e1006fc5471
   Reveal-iOS-SDK: c9c55cad2729c85f6ced415f1b21857c9a2d8ef9
 

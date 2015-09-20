@@ -13,8 +13,20 @@
 #import "EXTScope.h"
 #import "SPCWhatsAppFacade.h"
 #import "SPCLog.h"
+#import "UIView+Shortcuts.h"
 
-@interface SPCSpinnerViewController () <SPCContactViewDelegate>
+#import <DCPathButton/DCPathButton.h>
+
+typedef NS_ENUM (NSInteger, SPCSpinnerViewControllerContactActions) {
+    SPCSpinnerViewControllerContactActionsCall,
+    SPCSpinnerViewControllerContactActionsWhatsApp,
+    SPCSpinnerViewControllerContactActionsEdit,
+    SPCSpinnerViewControllerContactActionsDelete,
+    SPCSpinnerViewControllerContactActionsCount
+
+};
+
+@interface SPCSpinnerViewController () <SPCContactViewDelegate, DCPathButtonDelegate>
 
 @property (strong, nonatomic) NSArray *contacts;
 @property (strong, nonatomic) SPCAddressBookFacadeContact *currentDisplayedContact;
@@ -23,6 +35,8 @@
 @property (strong, nonatomic) UIImageView *backgroundImageView;
 @property (strong, nonatomic) UIVisualEffectView *blurEffectView;
 @property (strong, nonatomic) SPCContactView *contactView;
+
+@property (strong, nonatomic) DCPathButton *contactActionsButton;
 
 @end
 
@@ -53,8 +67,9 @@
 
     _contactView = [[SPCContactView alloc] initWithFrame:self.view.frame];
     _contactView.delegate = self;
-    _contactView.isWhatsappAvailable = [[SPCWhatsAppFacade sharedInstance] isWhatsAppAvailable];
     [self.view addSubview:_contactView];
+
+    [self configureContactActionsButton];
 
     self.addressBookAuthorizationStatus = [SPCAddressBookFacade addressBookAuthorizationStatus];
     [self requestAddressBookPermissionIfNeeded];
@@ -101,6 +116,48 @@
 }
 
 #pragma mark - Private
+
+- (void)configureContactActionsButton {
+    _contactActionsButton = [[DCPathButton alloc]initWithCenterImage:[UIImage imageNamed:@"chooser-button-tab"]
+                                                         highlightedImage:[UIImage imageNamed:@"chooser-button-tab-highlighted"]];
+    _contactActionsButton.delegate = self;
+
+    // Configure item buttons
+    DCPathItemButton *callButton = [[DCPathItemButton alloc]initWithImage:[UIImage imageNamed:@"chooser-moment-icon-call"]
+                                                           highlightedImage:[UIImage imageNamed:@"chooser-moment-icon-call-highlighted"]
+                                                            backgroundImage:[UIImage imageNamed:@"chooser-moment-button"]
+                                                 backgroundHighlightedImage:[UIImage imageNamed:@"chooser-moment-button-highlighted"]];
+
+    DCPathItemButton *whatsappButton = [[DCPathItemButton alloc]initWithImage:[UIImage imageNamed:@"chooser-moment-icon-whatsapp"]
+                                                           highlightedImage:[UIImage imageNamed:@"chooser-moment-icon-whatsapp-highlighted"]
+                                                            backgroundImage:[UIImage imageNamed:@"chooser-moment-button"]
+                                                 backgroundHighlightedImage:[UIImage imageNamed:@"chooser-moment-button-highlighted"]];
+    whatsappButton.enabled = [[SPCWhatsAppFacade sharedInstance] isWhatsAppAvailable];;
+
+    DCPathItemButton *editButton = [[DCPathItemButton alloc]initWithImage:[UIImage imageNamed:@"chooser-moment-icon-edit"]
+                                                           highlightedImage:[UIImage imageNamed:@"chooser-moment-icon-edit-highlighted"]
+                                                            backgroundImage:[UIImage imageNamed:@"chooser-moment-button"]
+                                                 backgroundHighlightedImage:[UIImage imageNamed:@"chooser-moment-button-highlighted"]];
+
+    DCPathItemButton *deleteButton = [[DCPathItemButton alloc]initWithImage:[UIImage imageNamed:@"chooser-moment-icon-delete"]
+                                                           highlightedImage:[UIImage imageNamed:@"chooser-moment-icon-delete-highlighted"]
+                                                            backgroundImage:[UIImage imageNamed:@"chooser-moment-button"]
+                                                 backgroundHighlightedImage:[UIImage imageNamed:@"chooser-moment-button-highlighted"]];
+
+    // Add the item button into the center button
+    //
+    [_contactActionsButton addPathItems:@[callButton, whatsappButton, editButton, deleteButton]];
+
+    _contactActionsButton.bloomRadius = 120.0f;
+    _contactActionsButton.allowSounds = YES;
+    _contactActionsButton.allowCenterButtonRotation = YES;
+    _contactActionsButton.bottomViewColor = [UIColor grayColor];
+    _contactActionsButton.bloomDirection = kDCPathButtonBloomDirectionTop;
+    _contactActionsButton.dcButtonCenter = CGPointMake(self.view.center.x, self.view.bottom - _contactActionsButton.frame.size.height - 50);
+
+    [self.view addSubview:_contactActionsButton];
+
+}
 
 - (void)requestAddressBookPermissionIfNeeded {
     if ([SPCAddressBookFacade addressBookAuthorizationStatus] != SPCAddressBookFacadeStatusDenied
@@ -151,19 +208,23 @@
     return [helloMessage stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 }
 
-#pragma mark - SPCContactViewDelegate
-
-- (void)phoneNumberLabelTapped:(NSString *)phoneNumber {
+- (void)callNumber:(const NSString *)phoneNumber {
     SPCLogDebug(@"Calling %@", phoneNumber);
     NSString *urlString = [@"tel:" stringByAppendingString:phoneNumber];
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlString]];
 }
 
-- (void)tappedOutSide {
-    [self loadRandomContact];
+- (void)whatsappContact {
+    SPCLogDebug(@"WhatsApp to %@", self.currentDisplayedContact.displayName);
+    [[SPCWhatsAppFacade sharedInstance] sendTextMessage:[self getHelloTextMessage] toUserID:self.currentDisplayedContact.recordID];
 }
 
-- (void)longTappedOutSide{
+- (void)editContact {
+    SPCLogDebug(@"Editing %@", self.currentDisplayedContact.displayName);
+    //TODO
+}
+
+- (void)deleteContact {
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Delete Contact!", nil) message:NSLocalizedString(@"Are you sure you want to delete this contact from your Address Book?", nil) preferredStyle:UIAlertControllerStyleAlert];
 
     @weakify(self);
@@ -184,9 +245,40 @@
     [self presentViewController:alertController animated:YES completion:nil];
 }
 
-- (void)didTapWhatsappButton {
-    SPCLogDebug(@"WhatsApp to %@", self.currentDisplayedContact.displayName);
-    [[SPCWhatsAppFacade sharedInstance] sendTextMessage:[self getHelloTextMessage] toUserID:self.currentDisplayedContact.recordID];
+#pragma mark - SPCContactViewDelegate
+
+- (void)phoneNumberLabelTapped:(NSString *)phoneNumber {
+    [self callNumber:phoneNumber];
 }
 
+- (void)tappedOutSide {
+    [self loadRandomContact];
+}
+
+- (void)longTappedOutSide{
+    [self deleteContact];
+
+}
+
+#pragma mark - DCPathButton Delegate
+
+- (void)pathButton:(DCPathButton *)dcPathButton clickItemButtonAtIndex:(NSUInteger)itemButtonIndex {
+    switch (itemButtonIndex) {
+        case SPCSpinnerViewControllerContactActionsCall:
+            [self callNumber:self.contactView.primaryPhoneNumber];
+            break;
+        case SPCSpinnerViewControllerContactActionsWhatsApp:
+            [self whatsappContact];
+            break;
+        case SPCSpinnerViewControllerContactActionsEdit:
+            [self editContact];
+            break;
+        case SPCSpinnerViewControllerContactActionsDelete:
+            [self deleteContact];
+            break;
+        default:
+            SPCLogError(@"Unexpected butten tapped");
+            break;
+    }
+}
 @end
