@@ -87,7 +87,10 @@ void addressBookExternalChangeCallback() {
         if (contactsFromSource) {
             NSMutableArray *resultContacts = [[NSMutableArray alloc] init];
             for (id value in contactsFromSource) {
-                [resultContacts addObject:[[SPCAddressBookFacadeContact alloc] initWithRecordID:[SPCAddressBookFacade recordIDForABRecordRef:value] firstName:[SPCAddressBookFacade firstNameForABRecordRef:value] lastName:[SPCAddressBookFacade lastNameForABRecordRef:value] thumbnailAvatar:[SPCAddressBookFacade thumbnailAvatarForABRecordRef:value] originalSizeAvatar:[SPCAddressBookFacade originalSizeAvatarForABRecordRef:value] phoneNumber:[SPCAddressBookFacade phoneNumbersForABRecordRef:value] emailAddresses:[SPCAddressBookFacade emailsForABRecordRef:value]]];
+                //Add just contacts with phone numbers
+                if ([SPCAddressBookFacade phoneNumbersForABRecordRef:value].count) {
+                    [resultContacts addObject:[[SPCAddressBookFacadeContact alloc] initWithRecordID:[SPCAddressBookFacade recordIDForABRecordRef:value] firstName:[SPCAddressBookFacade firstNameForABRecordRef:value] lastName:[SPCAddressBookFacade lastNameForABRecordRef:value] thumbnailAvatar:[SPCAddressBookFacade thumbnailAvatarForABRecordRef:value] originalSizeAvatar:[SPCAddressBookFacade originalSizeAvatarForABRecordRef:value] phoneNumber:[SPCAddressBookFacade phoneNumbersForABRecordRef:value] emailAddresses:[SPCAddressBookFacade emailsForABRecordRef:value]]];
+                }
             }
             [contactRefs addObjectsFromArray:resultContacts];
         }
